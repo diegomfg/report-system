@@ -53,7 +53,9 @@ form, .wrapper {
     
 }
 
-.centered{
+.centered {
+  
  width: fit-content;
- margin: 0 auto;
+ margin: 1em auto !important;
+ 
 }
