@@ -26,7 +26,7 @@ router.post("/register", function(req, res) {
     .then(success => {
       console.log("User registered succesfully");
       
-      res.redirect("/user/dashboard");
+      res.redirect("/user/all");
     })
     .catch(error => {
       console.log("Error: ", error);
@@ -39,20 +39,21 @@ router.post("/register", function(req, res) {
 
 
                                                         /********************LOGIN POST*****************/
-                                                
 router.post("/login", passport.authenticate("local", {
                                                   
         // succesRedirect: "/dashboard.ejs",
-        succesRedirect: "/",
+        succesRedirect: "/user/all",
         failureRedirect: "/"
                                                   
 }),function(req,res){console.log("Success")});
 
-                                                  /*********************** LISTING USERS **************************/
 
+                                                  /*********************** LISTING USERS **************************/
+                                                  
+                                                  
 router.get("/all", /*middleware.isLoggenIn,*/(req, res) => {
             
-    console.log("Redirecting to /listUsers");
+    console.log("Redirecting to /user/all");
             
       UserComponent.findAllUsers().then((_users) => {
               

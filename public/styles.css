@@ -59,3 +59,20 @@ form, .wrapper {
  margin: 1em auto !important;
  
 }
+
+
+/* semantic ui navbar */
+
+.ui.secondary.menu {
+    background: 0 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+
+/* end navbar*/

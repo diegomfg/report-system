@@ -8,52 +8,47 @@
     <% include ./partials/includes %>
 </head>
 <body>
-<% include ./partials/navbar.ejs %>
-
+<%  include ./partials/navbar.ejs %>
     <div class="container">
         <h1 class="jumbotron"> Log System </h1>
-        
         <div class="row">
-        
-        <form method="POST" action="/user/login" class="col-md-6">
-            <h1 class="form-title"> Log in </h1>
-          <div class="form-group">
-            <label for="loginUsername">Your new username</label>
-            <input type="text" class="form-control" id="loginUsername" aria-describedby="userName" id="loginUsername" name="username" placeholder="Username" required>
-            <small id="userName" class="form-text text-muted">Get access to the dashboard</small>
-          </div>
-          <div class="form-group">
-            <label for="loginPassword">Password</label>
-            <input type="password" class="form-control" id="loginPassword" name="password"placeholder="Password" required>
-          </div>
-          <button type="submit" class="btn btn-primary" disabled>Submit</button>
-        </form>
-        
-        <form action="/user/register" method="POST" class="col-md-6">
-            <h1 class="form-title"> Register </h1>
-                <div class="form-group">
-                    <label for="adminUsername">Username</label>
-                    <input class="form-control" id="adminUsername" type="text" name="username" placeholder="username" required>
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="apassword-field">Password</label>
-                    <input type="password" name="password" class="form-control" id="apassword-field" placeholder="password"
-                        required>
-                </div>
-
-                <div class="form-group">
-                    <label for="adminRole">Choose a role</label>
-                    <select id="adminRole" name="option">
-                        <option value="" selected disabled hidden>Choose here</option>
-                        <option value="admin">Admin</option>
-                        <option value="child">Child</option>
-                    </select>
-                </div>
-                <button class="btn btn-md btn-success" type="submit">Submit</button>
+            <form method="POST" action="/user/login" class="col-md-6">
+                <h1 class="form-title"> Log in </h1>
+              <div class="form-group">
+                <label for="loginUsername">Your new username</label>
+                <input type="text" class="form-control" id="loginUsername" aria-describedby="userName" id="loginUsername" name="username" placeholder="Username" required>
+                <small id="userName" class="form-text text-muted">Get access to the dashboard</small>
+              </div>
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" class="form-control" id="loginPassword" name="password"placeholder="Password" required>
+              </div>
+              <button type="submit" class="btn btn-primary" disabled>Submit</button>
             </form>
-        </div>
-        
+            
+            <form action="/user/register" method="POST" class="col-md-6">
+                <h1 class="form-title"> Register </h1>
+                    <div class="form-group">
+                        <label for="adminUsername">Username</label>
+                        <input class="form-control" id="adminUsername" type="text" name="username" placeholder="username" required>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="apassword-field">Password</label>
+                        <input type="password" name="password" class="form-control" id="apassword-field" placeholder="password"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminRole">Choose a role</label>
+                        <select id="adminRole" name="option">
+                            <option value="" selected disabled hidden>Choose here</option>
+                            <option value="admin">Admin</option>
+                            <option value="technician">Child</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-md btn-success" type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 

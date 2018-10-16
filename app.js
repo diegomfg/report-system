@@ -15,6 +15,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const indexRoutes = require("./routes/index.js");
 const logRoutes = require("./routes/logs.js");
 const userRoutes = require('./routes/user.js');
+const updateUsers = require('./updateUsers.js');
 // const port = 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,10 +26,11 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 /* end config */
 
+// updateUsers();
 
 /************ROUTES************/
 app.use("/", indexRoutes);
-app.use("/logs", logRoutes);
+app.use("/log", logRoutes);
 app.use("/user", userRoutes)
 /******************************/
 
