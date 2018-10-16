@@ -8,14 +8,15 @@ var passport                = require("passport");
 var LocalStrategy           = require("passport-local");
 var eSession                = require("express-session");
 var passportLocalMongoose   = require("passport-local-mongoose");
+// const userRoutes = require('./user.js');
+// const indexRoutes = require('./index.js');
 
 
 /******************** FORM TO SAVE A LOG *****************************/
 
 router.get("/new", function(req, res){
-    
   UserComponent.findAllUsers().then((allUsers)=>{
-      // console.log(allUsers);
+      
       res.render("newLog.ejs",{users: allUsers})
       
   }).catch((error)=>{
@@ -43,18 +44,22 @@ router.post("/new", /*middleware.isLoggedIn,*/ function(req, res){
      
         LogComponent.createNewLog(newLog).then((newLog)=>{
             console.log("Successfully created new log:", newLog);
-            res.redirect("/logs/all");
+            // res.redirect("/logs/all");
         }).catch((error)=>{
             console.log("Error:",error.message);
             res.redirect("/");
         });
+        
+        console.log("LogComponent:", LogComponent);
+        
+        res.redirect("/user/dashboard");
 
     }); 
     
 });
 
-router.get("/list", function(req, res){
-    res.render("")
+router.get("/all", function(req, res){
+    res.render("listLogs.ejs");
 })
 
 module.exports = router;

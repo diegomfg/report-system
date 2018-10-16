@@ -8,6 +8,10 @@ var passport                = require("passport");
 var LocalStrategy           = require("passport-local");
 var eSession                = require("express-session");
 var passportLocalMongoose   = require("passport-local-mongoose");
+// const logRoutes = require('./logs.js');
+// const userRoutes = require("./user.js");
+// router.use("/log", logRoutes);
+// router.use("/user", userRoutes);
 
 router.get("/", (req, res) => {
   
@@ -15,5 +19,7 @@ router.get("/", (req, res) => {
   
 });
 
-
+// router.get("*", (req, res)=>{
+//     res.render("404.ejs", {path: req.path});
+// });
 module.exports = router;

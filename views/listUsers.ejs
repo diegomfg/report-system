@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <title>Listing Users</title>
+</head>
+<body>
+    <%  include ./partials/navbar.ejs  %>
+    <div class="ui container">
+            <h1 class="ui centered text">Listing Users</h1>
+            <table class="ui celled unstackable table">
+                  <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>ID</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <% users.forEach(function(user){ %>
+                    <tr>
+                      <td data-label="Username"><%- user.username %></td>
+                      <td data-label="Role"><%- user.role %></td>
+                      <td data-label="ID"><%- user._id %></td>
+                    </tr>
+                <% }) %>    
+                  </tbody>
+                </table>
+        <a href="/" class="ui button">Back</a>
+    </div>
+</body>
+</html>

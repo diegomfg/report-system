@@ -7,7 +7,6 @@ var eSession                = require("express-session");
 var passportLocalMongoose   = require("passport-local-mongoose");
 
 function createNewLog(newLog){
-    console.log("createNewLog");
     return new Promise((resolve, reject)=>{
        Log.create(newLog, function(error, _newLog){
            
@@ -36,5 +35,5 @@ function findAllLogs(){
     });
 };
 
-module.expors = { createNewLog, findAllLogs };
+module.exports = { createNewLog, findAllLogs };
 

@@ -4,7 +4,9 @@
         <title>Error</title>
         <% include ./partials/includes %>
     </head>
-    <body>
-        <% include ./partials/navbar %>
-        <h1>Error, couldn't find page</h1>
-    <% include ./partials/footer %>
+<body>
+<% include ./partials/navbar %>
+    <div class="container">
+        <h1>Error, couldn't find page <code><%=path%></code></h1>
+    </div>
+<% include ./partials/footer %>

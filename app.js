@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const mongoClient = require("mongoose");
-const mongoose = require("mongoose");
+const MongoClient = require('mongodb').MongoClient;
+const Mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const User = require("./models/User.js");
 const Log = require("./models/Log.js");
@@ -16,24 +16,28 @@ const indexRoutes = require("./routes/index.js");
 const logRoutes = require("./routes/logs.js");
 const userRoutes = require('./routes/user.js');
 const updateUsers = require('./updateUsers.js');
-// const port = 8080;
+// const port = process.env.PORT || 8080;
+
+// MongoClient.connect("mongodb://localhost:users", function(err, db) {
+//   if(!err) {
+//     console.log("We are connected");
+//   }
+// });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-mongoClient.connect("mongodb://localhost/users");
+Mongoose.connect("mongodb://localhost/users");
 app.use(methodOverride("_method"));
 app.use(flash());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-/* end config */
 
 // updateUsers();
 
 /************ROUTES************/
 app.use("/", indexRoutes);
 app.use("/log", logRoutes);
-app.use("/user", userRoutes)
+app.use("/user", userRoutes);
 /******************************/
-
 
 /* ---------------- Passport Config ------------------*/
 

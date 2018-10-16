@@ -49,8 +49,7 @@ router.post("/login", passport.authenticate("local", {
 
 
                                                   /*********************** LISTING USERS **************************/
-                                                  
-                                                  
+
 router.get("/all", /*middleware.isLoggenIn,*/(req, res) => {
             
     console.log("Redirecting to /user/all");
@@ -58,7 +57,7 @@ router.get("/all", /*middleware.isLoggenIn,*/(req, res) => {
       UserComponent.findAllUsers().then((_users) => {
               
             console.log("Found users");
-            res.render("lists", {users: _users});
+            res.render("listUsers", {users: _users});
               
           }).catch((error)=>{
               
