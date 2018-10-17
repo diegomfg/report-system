@@ -21,16 +21,21 @@ const port = process.env.PORT || 8080;
 Mongoose.connect("mongodb://localhost/users");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(ExpressSession({
-    secret: "User Authentication",
-    resave: false,
-    saveUninitialized: false }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(methodOverride("_method"));
 // app.use(flash());
 app.set("view engine", "ejs");
-/* ---------------- Passport Config ------------------*/
+
+app.use(ExpressSession({ 
+    secret: "User Authentication", 
+    resave: false, 
+    saveUninitialized: false })); //this has to be initialized before passport.initialize()
+    
+app.use(passport.initialize()); //good stuff
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // for when i found a better name for non-admin users
 // updateUsers();
@@ -54,10 +59,6 @@ app.use("/user", userRoutes);
 //   }
 // ));
 
-passport.use(new LocalStrategy(User.authenticate()));
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.currentUser = req.user;
     // res.locals.error = req.flash("error");

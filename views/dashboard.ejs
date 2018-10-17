@@ -7,5 +7,10 @@
 <% include ./partials/navbar %>
     <div class="container">
         <h1>Dashboard</h1>
+        <% if(currentUser) { %>
+            <h3>Logged in as <%= currentUser.username %></h3>
+        <% } else { %>
+        <h3>No one logged in</h3>
+        <% } %>
     </div>
 <% include ./partials/footer %>

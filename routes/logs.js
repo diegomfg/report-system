@@ -41,14 +41,15 @@ router.post("/new", /*middleware.isLoggedIn,*/ function(req, res){
         }
      
         LogComponent.createNewLog(newLog).then((newLog)=>{
+            
+            foundUser.logEvents.push(newLog._id);
+            foundUser.save();
             console.log("Successfully created new log:", newLog);
             // res.redirect("/logs/all");
         }).catch((error)=>{
             console.log("Error:",error.message);
             res.redirect("/");
         });
-        
-        console.log("LogComponent:", LogComponent);
         
         res.redirect("/user/dashboard");
 

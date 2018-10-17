@@ -42,17 +42,16 @@ router.post("/register", function(req, res) {
 
                                                         /********************LOGIN POST*****************/
 router.post("/login", passport.authenticate("local", {
-    
-    successRedirect: "/user/dashboard",
+    successRedirect: "/user/all",
     failureRedirect: "/"
-    
-}), function(req, res){});
-
+}), (req, res)=>{console.log("asdasd")});
 
 
                                                   /*********************** LISTING USERS **************************/
 
 router.get("/all", /*middleware.isLoggenIn,*/(req, res) => {
+  
+  console.log("Current user:", req.user);
             
       UserComponent.findAllUsers().then((_users) => {
             
@@ -69,7 +68,7 @@ router.get("/all", /*middleware.isLoggenIn,*/(req, res) => {
 /**********************dashboard***************************/
 
 router.get("/dashboard", /*middleware.isLoggenIn,*/(req, res)=>{
-  res.render("dashboard.ejs");
+  res.render("dashboard.ejs", {currentUser: req.user});
 });
 
 
