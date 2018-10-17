@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 function updateUsers(){
   User.find({}, function(error, allUsers){
     allUsers.forEach((user)=>{
-      if(user.role === "child"){
-        user.role = "technician";
+      if(user.role !== "admin"){
+        user.role = "junior";
         user.save();
       }
     });

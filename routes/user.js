@@ -1,5 +1,5 @@
 const server = require("express");
-const router = server.Router();
+const router = server.Router({mergeparams: true});
 const User = require("../models/User.js");
 const Log = require("../models/Log.js");
 const UserComponent = require("../components/user.js");
@@ -23,16 +23,18 @@ router.post("/register", function(req, res) {
   });
 
   UserComponent.createNewUser(newUser, _password)
-    .then(success => {
+    .then(newUser => {
       console.log("User registered succesfully");
-      
-      res.redirect("/user/all");
+      passport.authenticate("local")(req, res, function(){
+              
+              res.redirect("/user/all");
+        });
     })
     .catch(error => {
       console.log("Error: ", error);
-      // if(error.name === 'UserExistsError'){
-      //   req.flash("error", error.message);
-      // }
+      if(error.name === 'UserExistsError'){
+        console.log("Error trying to create a user");
+      }
       res.redirect("/");
     });
 });
@@ -40,23 +42,20 @@ router.post("/register", function(req, res) {
 
                                                         /********************LOGIN POST*****************/
 router.post("/login", passport.authenticate("local", {
-                                                  
-        // succesRedirect: "/dashboard.ejs",
-        succesRedirect: "/user/all",
-        failureRedirect: "/"
-                                                  
-}),function(req,res){console.log("Success")});
+    
+    successRedirect: "/user/dashboard",
+    failureRedirect: "/"
+    
+}), function(req, res){});
+
 
 
                                                   /*********************** LISTING USERS **************************/
 
 router.get("/all", /*middleware.isLoggenIn,*/(req, res) => {
             
-    console.log("Redirecting to /user/all");
-            
       UserComponent.findAllUsers().then((_users) => {
-              
-            console.log("Found users");
+            
             res.render("listUsers", {users: _users});
               
           }).catch((error)=>{

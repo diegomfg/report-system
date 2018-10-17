@@ -26,8 +26,6 @@ router.get("/new", function(req, res){
   
 });
 
-/*************************************************/
-
 /********************* SAVING A LOG - LOGIC ****************************/
                                                 
 // ADD middleware.isLoggedIn
