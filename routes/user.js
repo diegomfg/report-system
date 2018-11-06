@@ -8,9 +8,10 @@ var passport                = require("passport");
 var LocalStrategy           = require("passport-local");
 var eSession                = require("express-session");
 var passportLocalMongoose   = require("passport-local-mongoose");
+var middleware = require("../middleware/validation.js");
 
-                                                /********************* REGISTERING A USER ****************************/
-                                                
+/********************* REGISTERING A USER ****************************/
+  
 router.post("/register", function(req, res) {
   
   var _username = req.body.username;
@@ -27,13 +28,17 @@ router.post("/register", function(req, res) {
       console.log("User registered succesfully");
       passport.authenticate("local")(req, res, function(){
               
+              req.flash("success", "Succesfully created new user");
               res.redirect("/user/all");
         });
     })
     .catch(error => {
       console.log("Error: ", error);
       if(error.name === 'UserExistsError'){
+        
+        req.flash("error", "There's an existing user with that username");
         console.log("Error trying to create a user");
+        
       }
       res.redirect("/");
     });
@@ -44,18 +49,18 @@ router.post("/register", function(req, res) {
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/user/all",
     failureRedirect: "/"
-}), (req, res)=>{console.log("asdasd")});
+}), (req, res)=>{});
 
 
                                                   /*********************** LISTING USERS **************************/
 
-router.get("/all", /*middleware.isLoggenIn,*/(req, res) => {
+router.get("/all", middleware.isLoggedIn, function(req, res){
   
   console.log("Current user:", req.user);
             
       UserComponent.findAllUsers().then((_users) => {
             
-            res.render("listUsers", {users: _users});
+            res.render("listUsers", {users: _users,currentUser: req.user});
               
           }).catch((error)=>{
               
@@ -67,8 +72,18 @@ router.get("/all", /*middleware.isLoggenIn,*/(req, res) => {
 
 /**********************dashboard***************************/
 
-router.get("/dashboard", /*middleware.isLoggenIn,*/(req, res)=>{
+router.get("/dashboard", (req, res)=>{
+  
   res.render("dashboard.ejs", {currentUser: req.user});
+  
+});
+
+router.get("/logout", function(req, res){
+
+    req.logout();
+    console.log("Success: Succesfully logged out");
+    res.redirect("/user/dashboard");
+    
 });
 
 

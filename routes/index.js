@@ -1,5 +1,5 @@
 const server = require("express");
-const router = server.Router();
+const router = server.Router({mergeparams: true});
 const User = require("../models/User.js");
 const Log = require("../models/Log.js");
 const UserComponent = require("../components/user.js");
@@ -8,18 +8,15 @@ var passport                = require("passport");
 var LocalStrategy           = require("passport-local");
 var eSession                = require("express-session");
 var passportLocalMongoose   = require("passport-local-mongoose");
-// const logRoutes = require('./logs.js');
-// const userRoutes = require("./user.js");
-// router.use("/log", logRoutes);
-// router.use("/user", userRoutes);
 
 router.get("/", (req, res) => {
   
-  res.render("index.ejs");
+  res.render("index.ejs", {currentUser: req.user});
   
 });
 
-// router.get("*", (req, res)=>{
-//     res.render("404.ejs", {path: req.path});
-// });
+
+router.get("/error", (req, res)=>{
+    res.render("404.ejs", {path: req.path});
+});
 module.exports = router;
