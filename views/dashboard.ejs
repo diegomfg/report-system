@@ -5,12 +5,14 @@
     </head>
 <body>
 <% include ./partials/navbar %>
+<% include ./partials/flash %>
     <div class="container">
-        <h1>Dashboard</h1>
-        <% if(currentUser) { %>
-            <h3>Logged in as <%= currentUser.username %></h3>
+        <h1 class="title">Dashboard</h1>
+        <% if(typeof(currentUser) !== "undefined") { %>
+            <h3>Logged in as <code><%= currentUser.username %></code> </h3>
         <% } else { %>
-        <h3>No one logged in</h3>
+            <% console.log("No one logged in at dashboard, type of currentUser:", typeof(currentUser)) %>
+            <h3>No one logged in</h3>
         <% } %>
     </div>
 <% include ./partials/footer %>

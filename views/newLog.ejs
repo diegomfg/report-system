@@ -10,6 +10,7 @@
 <body>
 
 <% include ./partials/navbar.ejs%>
+<% include ./partials/flash %>
 
     <div class="container">
         
@@ -23,11 +24,11 @@
                             required>
                     </div>
                     <div class="form-group">
-                        <label for="LogBody" class="form-title">Body</label>
+                        <label for="LogBody" class="title">Body</label>
                         <textarea name="LogBody" class="form-control" id="LogBody" placeholder="Body goes here"></textarea>
                     </div>
                     
-                    <% if(users) { %>
+                    <% if (users) { %>
                         <div class="form-group">
                         <label for="LogAuthor" class="form-title"> Author </label>
                         <select name="LogAuthor" class="select" id="LogAuthor">
@@ -43,12 +44,12 @@
                      <div class="form-group">
                         <label for="LogArea" class="form-title">Project Area</label>
                         <select name="LogArea" class="select" id="LogArea">
-                            <option value="fend">Front End</option>
-                            <option value="videsign">Visual Design</option>
-                            <option value="bend">Back End</option>
+                            <option value="front_end">Front End</option>
+                            <option value="visual_design">Visual Design</option>
+                            <option value="back_end">Back End</option>
                             <option value="routing">Routing</option>
                             <option value="api">API</option>
-                            <option value="db">Database</option>
+                            <option value="database">Database</option>
                         </select>
                     </div>
                     <div class="centered">
