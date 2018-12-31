@@ -36,7 +36,7 @@ router.post("/new", middleware.isLoggedIn, function(req, res){
  User.findOne({_id: req.user._id}, function(error, foundUser){
     
     
-        if(error || !foundUser){ // if foundUser is !null, the if statement goes evaluates as true
+        if(error || !foundUser){ // !null is true
             
             req.flash("error", "Something unexpected happenen");
             res.redirect("/");
