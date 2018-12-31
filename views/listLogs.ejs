@@ -15,8 +15,23 @@
 <body>
 <% include ./partials/navbar %>
 <% include ./partials/flash %>
-    <!--table for each log-->
     <div class="container">
         <h2 class="title">Listing all logs</h2>
+        <% if(logs.length > 0) { %>
+            <div class="row-logs">
+                <% logs.forEach((log)=>{ %>
+                    <div class="card">
+                        <h1>By: <span class="author"><%=log.author.username%></span></h1>         
+                        <h3>Area: <%=log.area%></h3>
+                        <p>Title: <%=log.title%></p>
+                        <p>Body: <span>Body of log</span></p>
+                        <a href="/log/<%=log._id%>" class="btn btn-md btn-primary">More...</a>
+                        <!--<button class="btn btn-md btn-primary">More...</button>-->
+                    </div>
+                <% }) %>
+            </div>
+                <% } else { %>
+                    <code><h1>No logs at the moment</h1></code>
+                <% } %>
     </div>
 <% include ./partials/footer %>    

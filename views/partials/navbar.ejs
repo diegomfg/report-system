@@ -13,12 +13,12 @@
 <!--      </a>-->
       
 <!--      <div class="right menu">-->
-<!--        <% /* if(typeof(currentUser) !== "undefined") { */%>
+        <% /* if(typeof(currentUser) !== "undefined") { */%>
 <!--            <a class="ui item" href="/user/logout">Logout</a>-->
         <% /* } else { */ %>
-<!--          <% /* console.log("current user is:", typeof(currentUser)) */ %>
+          <% /* console.log("current user is:", typeof(currentUser)) */ %>
 <!--          <span class="ui item">Login</span>-->
-<!--          <% /* } */%>-->
+          <% /* } */%>
 <!--      </div>-->
 <!--    </div>-->
 
@@ -34,10 +34,13 @@
         <a class="nav-link" href="/"><i class="home icon"></i> Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/user/dashboard"><i class="chart bar outline icon"></i> Dashboard</a>
+        <a class="nav-link" href="/user/dashboard"><i class="chart pie icon"></i>   Dashboard</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/log/new"><i class="file alternate icon"></i> New Log</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/log/all"><i class="archive icon"></i>Logs</a>
       </li>
                 <ul class="nav navbar-nav navbar-right">
                   <% if (typeof(currentUser) === "undefined") { %>

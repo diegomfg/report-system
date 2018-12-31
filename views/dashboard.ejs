@@ -9,10 +9,25 @@
     <div class="container">
         <h1 class="title">Dashboard</h1>
         <% if(typeof(currentUser) !== "undefined") { %>
-            <h3>Logged in as <code><%= currentUser.username %></code> </h3>
+            <h3>Logged in as <code><%= currentUser.username %></code>, welcome. </h3>
         <% } else { %>
             <% console.log("No one logged in at dashboard, type of currentUser:", typeof(currentUser)) %>
             <h3>No one logged in</h3>
         <% } %>
     </div>
+    <!--<div class="container">-->
+    <!--        <div class="side-menu">-->
+    <!--            <ul>-->
+    <!--                <li>My Profile</li>-->
+    <!--                <li>Hello</li>-->
+    <!--                <li>Hello</li>-->
+    <!--            </ul>-->
+    <!--        </div>-->
+    <!--        <div class="container">-->
+    <!--            <div>Approve or Deny logs</div>-->
+    <!--            <div>View Active Users</div>-->
+    <!--            <div>Your log history</div>-->
+    <!--            <div>My Profile</div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 <% include ./partials/footer %>

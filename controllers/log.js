@@ -26,7 +26,7 @@ function createNewLog(newLog){
 function findAllLogs(){
     return new Promise((resolve, reject)=>{
         Log.find({}, (error, allLogs)=>{
-            if(error){
+            if(error || !allLogs){
                 reject(error);
             } else {
                 resolve(allLogs);
@@ -35,5 +35,18 @@ function findAllLogs(){
     });
 };
 
-module.exports = { createNewLog, findAllLogs };
+function findById(id){
+    return new Promise((resolve, reject)=>{
+        Log.findById(id, (error, foundLog)=>{
+            if(error || !foundLog){
+                console.log("error in findById promise")
+                reject(error || foundLog);
+            } else {
+                resolve(foundLog);
+            }
+        })
+    })
+}
+
+module.exports = { createNewLog, findAllLogs, findById };
 

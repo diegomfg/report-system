@@ -2,8 +2,8 @@ const server = require("express");
 const router = server.Router({mergeparams: true});
 const User = require("../models/User.js");
 const Log = require("../models/Log.js");
-const UserComponent = require("../components/user.js");
-const LogComponent = require("../components/log.js");
+const UserComponent = require("../controllers/user.js");
+const LogComponent = require("../controllers/log.js");
 var passport                = require("passport");
 var LocalStrategy           = require("passport-local");
 var eSession                = require("express-session");
@@ -14,9 +14,11 @@ var middleware = require("../middleware/validation.js");
   
 router.post("/register", function(req, res) {
   
-  var _username = req.body.username;
-  var _password = req.body.password;
-  var _role = req.body.option;
+  const {username, password, option} = req.body;
+  
+  var _username = username;
+  var _password = password;
+  var _role = option;
 
   var newUser = new User({
     username: _username,
@@ -54,25 +56,26 @@ router.post("/login", passport.authenticate("local", {
 
                                                   /*********************** LISTING USERS **************************/
 
-router.get("/all", middleware.isLoggedIn, function(req, res){
-  
-  console.log("Current user:", req.user);
+router.get("/all", middleware.isLoggedIn, async (req, res, next)=>{
             
-      UserComponent.findAllUsers().then((_users) => {
-            
-            res.render("listUsers", {users: _users,currentUser: req.user});
-              
-          }).catch((error)=>{
-              
-        console.log("error, could not fetch users");
-        res.redirect("/");
-              
-    });
+      try{
+        
+        const AllUsers = await UserComponent.findAllUsers();
+        res.render("listUsers", {users:AllUsers});
+        
+        
+      }catch(error){
+        
+          console.log("Error: ", error);
+          req.flash("error", "Unable to fetch data");
+          res.redirect("/");
+      }
+      
 });
 
 /**********************dashboard***************************/
 
-router.get("/dashboard", (req, res)=>{
+router.get("/dashboard", middleware.isLoggedIn, async (req, res, next)=>{
   
   res.render("dashboard.ejs", {currentUser: req.user});
   
@@ -81,10 +84,9 @@ router.get("/dashboard", (req, res)=>{
 router.get("/logout", function(req, res){
 
     req.logout();
-    console.log("Success: Succesfully logged out");
-    res.redirect("/user/dashboard");
+    req.flash("success", "Succesfully logged out");
+    res.redirect("/");
     
 });
-
 
 module.exports = router;

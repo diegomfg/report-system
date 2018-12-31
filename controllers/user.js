@@ -1,11 +1,11 @@
 const User                  = require("../models/User.js");
 const mongoose              = require("mongoose");
-var passport                = require("passport");
-var LocalStrategy           = require("passport-local");
-var eSession                = require("express-session");
-var passportLocalMongoose   = require("passport-local-mongoose");
+const passport                = require("passport");
+const LocalStrategy           = require("passport-local");
+const eSession                = require("express-session");
+const passportLocalMongoose   = require("passport-local-mongoose");
 
-var createNewUser = (newUser, _password) => {
+const createNewUser = (newUser, _password) => {
   return new Promise((resolve, reject) => {
     
     User.register(newUser, _password, (error, _newUser) => {
@@ -17,15 +17,14 @@ var createNewUser = (newUser, _password) => {
     });
   });
 };
-  
 
-var findAllUsers = () => {
+const findAllUsers = () => {
   return new Promise((resolve, reject)=>{
-    User.find({}, (error, _users)=>{
-      if(error){
+    User.find({}, (error, users)=>{
+      if(error || !users){
         reject(error);
       } else {
-        resolve(_users);
+        resolve(users);
       };
     });
   });

@@ -5,7 +5,7 @@ const Mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const User = require("./models/User.js");
 const Log = require("./models/Log.js");
-const UComponent = require("./components/user.js");
+const UComponent = require("./controllers/user.js");
 const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -19,7 +19,7 @@ const flash = require('connect-flash');
 const port = process.env.PORT || 8080;
 // const cookieParser = require("cookie-parser");
 
-Mongoose.connect("mongodb://localhost/users", {useNewUrlParser: true});
+Mongoose.connect("mongodb://localhost/LogApp", {useNewUrlParser: true});
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -62,5 +62,5 @@ app.use("/user", userRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, () => {
-  console.log("Service is running");
+  console.log(`Service is running at port ${port}`);
 });

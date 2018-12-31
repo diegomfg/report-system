@@ -5,7 +5,7 @@ function updateUsers(){
   User.find({}, function(error, allUsers){
     allUsers.forEach((user)=>{
       if(user.role !== "admin"){
-        user.role = "junior";
+        user.role = "support";
         user.save();
       }
     });
