@@ -44,7 +44,7 @@ router.post("/new", middleware.isLoggedIn, function(req, res){
             
         } else if(foundUser){
             // create a new log object
-            const {LogTitle, LogBody, username, LogArea} = req.body;
+            const {LogTitle, LogBody, LogArea} = req.body;
             
           var newLog = {
                  title: LogTitle,
@@ -54,10 +54,10 @@ router.post("/new", middleware.isLoggedIn, function(req, res){
             }
          
         //  call the log component to create new log
-         
+        /**
+         * @Author Refactor this with Async Await 
+         */
             LogComponent.createNewLog(newLog).then((newLog)=>{
-                
-                
                 // pushing the new log's id to new current user
                 foundUser.logEvents.push(newLog._id);
                 foundUser.save();

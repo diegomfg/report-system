@@ -11,15 +11,16 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const ExpressSession = require('express-session');
 const passportLocalMongoose = require("passport-local-mongoose");
-const indexRoutes = require("./routes/index.js");
-const logRoutes = require("./routes/logs.js");
-const userRoutes = require('./routes/user.js');
+const indexController = require("./routes/index.js");
+const logController = require("./routes/logs.js");
+const userController = require('./routes/user.js');
 const updateUsers = require('./updateUsers.js');
 const flash = require('connect-flash');
-const port = process.env.PORT || 8080;
+const config = require("./config");
+const port = config.PORT || 8080;
 // const cookieParser = require("cookie-parser");
 
-Mongoose.connect("mongodb://localhost/LogApp", {useNewUrlParser: true});
+Mongoose.connect(config.MONGODB_URI, {useNewUrlParser: true});
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -40,9 +41,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 /**********************END SESSION CONFIG ******************************/
-
 app.use(flash());
-
 
 /* GLOBAL MIDDLEWARE */
 
@@ -56,11 +55,11 @@ app.use((req,res,next)=>{
 // for when i found a better name for non-admin users
 // updateUsers();
 
-app.use("/", indexRoutes);
-app.use("/log", logRoutes);
-app.use("/user", userRoutes);
+app.use("/", indexController);
+app.use("/log", logController);
+app.use("/user", userController);
 
 
-app.listen(process.env.PORT, process.env.IP, () => {
-  console.log(`Service is running at port ${port}`);
+app.listen(config.PORT, process.env.IP, () => {
+  console.log(`Server is running at port ${port}`);
 });
