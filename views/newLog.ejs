@@ -1,49 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Log System</title>
     <% include ./partials/includes %>
-</head>
-<body>
-
-<% include ./partials/navbar.ejs%>
-<% include ./partials/flash %>
+  </head>
+  <body>
+    <% include ./partials/navbar.ejs%> <% include ./partials/flash %>
 
     <div class="container">
-        
-        <div class="wrapper">
-            
-            <form action="/log/new" method="POST" class="col-md-12">
-                <h1 class="form-title"> Create a log </h1>
-                    <div class="form-group">
-                        <label for="LogTitle" class="form-title">Title</label>
-                        <input type="text" class="form-control" id="LogTitle" name="LogTitle" placeholder="Title of the log.."
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <label for="LogBody" class="form-title">Body</label>
-                        <textarea name="LogBody" class="form-control" id="LogBody" placeholder="Body goes here"></textarea>
-                    </div>
-                    
-                     <div class="form-group">
-                        <label for="LogArea" class="form-title">Project Area</label>
-                        <select name="LogArea" class="select" id="LogArea">
-                            <option value="front_end">Front End</option>
-                            <option value="visual_design">Visual Design</option>
-                            <option value="api">API</option>
-                            <option value="routing">Routing</option>
-                            <option value="database">Database</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="centered">
-                        <button class="btn btn-md btn-success" type="submit">Submit for approval</button>
-                        <a href="/" class="btn btn-md btn-danger">Back</a>
-                    </div>    
-            </form>
-        </div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/log/all">Reports</a></li>
+          <li class="breadcrumb-item">
+            <a href="/user/dashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">New Report</li>
+        </ol>
+      </nav>
+      <div class="wrapper">
+        <form action="/log/new" method="POST" class="col-md-12">
+          <h1 class="form-title">Create a report</h1>
+          <div class="form-group">
+            <label for="LogTitle" class="form-title">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="LogTitle"
+              name="LogTitle"
+              placeholder="Title of the log.."
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="LogBody" class="form-title">Body</label>
+            <textarea
+              name="LogBody"
+              class="form-control"
+              id="LogBody"
+              placeholder="Body goes here"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="LogArea" class="form-title">Project Area</label>
+            <select name="LogArea" class="select" id="LogArea">
+              <option value="front_end">Front End</option>
+              <option value="api">API</option>
+              <option value="routing">Routing</option>
+              <option value="database">Database</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="centered">
+            <button class="btn btn-md btn-success" type="submit">
+              Submit for approval
+            </button>
+            <a href="/" class="btn btn-md btn-danger">Back</a>
+          </div>
+        </form>
+      </div>
     </div>
-<% include ./partials/footer.ejs %>
+    <% include ./partials/footer.ejs %>
+  </body>
+</html>

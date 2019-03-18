@@ -11,10 +11,20 @@
 <%  include ./partials/navbar.ejs %>
 <% include ./partials/flash %>
     <div class="container">
-        <h1 class="jumbotron"> Log System </h1>
+            <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item" aria-current="page"><a href="/">Home</a></li>
+                      <li class="breadcrumb-item"><a href="/log/all">Reports</a></li>
+                      <li class="breadcrumb-item">
+                        <a href="/user/dashboard">Dashboard</a>
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page"> <a href="/log/new">New Report</a></li>
+                    </ol>
+                  </nav>
+        <h1 class="display-2 text-danger"> Report System </h1>
         <div class="row">
             <form method="POST" action="/user/login" class="col-md-6">
-                <h1 class="form-title"> Log in </h1>
+                <h1 class="form-title display-4"> Log in </h1>
               <div class="form-group">
                 <label for="loginUsername">Your new username</label>
                 <input type="text" class="form-control" id="loginUsername" aria-describedby="userName" id="loginUsername" name="username" placeholder="Username" required>
@@ -28,7 +38,7 @@
             </form>
             
             <form action="/user/register" method="POST" class="col-md-6">
-                <h1 class="form-title"> Register </h1>
+                <h1 class="form-title display-4"> Register </h1>
                     <div class="form-group">
                         <label for="adminUsername">Username</label>
                         <input class="form-control" id="adminUsername" type="text" name="username" placeholder="username" required>

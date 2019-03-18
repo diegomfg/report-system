@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Log System</title>
     <% include ./partials/includes %>
-</head>
-<body>
-<% include ./partials/navbar %>
-<% include ./partials/flash %>
+  </head>
+  <body>
+    <% include ./partials/navbar %> <% include ./partials/flash %>
     <div class="container">
-        <h2 class="title">Listing all logs</h2>
-        <% if(logs.length > 0) { %>
-            <div class="row-logs">
-                <% logs.forEach((log)=>{ %>
-                    <div class="card">
-                        <h1>By: <span class="author"><%=log.author.username%></span></h1>         
-                        <h3>Area: <%=log.area%></h3>
-                        <p>Title: <%=log.title%></p>
-                        <p>Body: <span>Body of log</span></p>
-                        <a href="/log/<%=log._id%>" class="btn btn-md btn-primary">More...</a>
-                        <!--<button class="btn btn-md btn-primary">More...</button>-->
-                    </div>
-                <% }) %>
-            </div>
-                <% } else { %>
-                    <code><h1>No logs at the moment</h1></code>
-                <% } %>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" aria-current="page">
+            <a href="/">Home</a>
+          </li>
+          <li class="breadcrumb-item"><a href="/log/all">Reports</a></li>
+          <li class="breadcrumb-item">
+            <a href="/user/dashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">
+            <a href="/log/new">New Report</a>
+          </li>
+        </ol>
+      </nav>
+      <h2 class="display-2">Listing all reports</h2>
+      <% if(logs.length > 0) { %>
+      <div class="row-logs">
+        <% logs.forEach((log)=>{ %>
+        <div class="card">
+          <h1>By: <span class="author"><%=log.author.username%></span></h1>
+          <h3>Area: <%=log.area%></h3>
+          <p>Title: <%=log.title%></p>
+          <p>Body: <span>Body of log</span></p>
+          <a href="/log/<%=log._id%>" class="btn btn-md btn-primary">More...</a>
+          <!--<button class="btn btn-md btn-primary">More...</button>-->
+        </div>
+        <% }) %>
+      </div>
+      <% } else { %>
+      <code><h1>No reports at the moment</h1></code>
+      <% } %>
     </div>
-<% include ./partials/footer %>    
+    <% include ./partials/footer %>
+  </body>
+</html>

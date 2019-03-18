@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import User from "./components/user";
+import Navbar from "./components/navbar";
+import $ from "jquery";
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <User name={"diego"}/>
-          <User name={"daniel"}/>
-          <User name={"luis"}/>
-        </header>
+        <Navbar />
+        <div className="jumbotron">
+          <div className="container">
+            <User name={"diego"}/>
+            <User name={"daniel"}/>
+            <User name={"luis"}/>
+          </div>
+        </div>
       </div>
     );
   }
