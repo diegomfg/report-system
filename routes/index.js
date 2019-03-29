@@ -3,12 +3,12 @@ const router = server.Router({mergeparams: true});
 
 router.get("/", (req, res) => {
   
-  res.render("index.ejs", {currentUser: req.user});
+  res.send({message: `Route: ${req.path}`});
   
 });
 
 
 router.get("/error", (req, res)=>{
-    res.render("404.ejs", {path: req.path, currentUser: req.user});
+    res.send({path: req.path, currentUser: req.user});
 });
 module.exports = router;

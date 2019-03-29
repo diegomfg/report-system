@@ -43,11 +43,10 @@ module.exports.findById = (id) =>{
 module.exports.newReportRoute = async (req, res) => {
   try {
     var allUsers = await UserController.findAllUsers();
-    res.render("newLog.ejs", { users: allUsers, currentUser: req.user });
+    res.send({ users: allUsers, currentUser: req.user });
   } catch (error) {
     console.log("error: ", error);
-    req.flash("error", "Something unexpected occurred");
-    res.render("newLog.ejs");
+    res.send({message: error.message})
   }
 }
 
@@ -55,12 +54,11 @@ module.exports.createNewReport = async function (req, res) {
 
   try {
 
-    var foundUser = await User.findOne({ _id: req.user._id });
-
+    var foundUser = await User.findOne({ _id: req.body.id });
+    console.log(req.body)
     if (!foundUser) {
 
-      req.flash("error", "Something unexpected happened");
-      res.redirect("/");
+      res.send({message: error.message});
       console.log(
           `Either an error or !foundUser:\nError:${error}\nFoundUser:${foundUser}`
       );
@@ -88,20 +86,14 @@ module.exports.createNewReport = async function (req, res) {
 
       foundUser.save();
 
-      req.flash("success", "Successfully created new log");
-
-      console.log("Successfully created new log:", newLog);
-
-      res.redirect("/log/all");
+      res.send(newLog);
 
     }
   } catch (error) {
 
     console.log("Error:", error.message);
 
-    req.flash("error", error.message);
-
-    res.redirect("/");
+    res.send({message: error.message});
 
   }
 }
@@ -109,10 +101,10 @@ module.exports.createNewReport = async function (req, res) {
 module.exports.renderAllReports = async (req, res, next) => {
   try {
     const logs = await this.findAllReports();
-    res.render("listLogs", { logs: logs });
+    res.send({logs: logs });
   } catch (error) {
     req.flash("error", "Unable to fetch items");
-    return next(error);
+    res.send({message: error.message});
   }
 }
 
@@ -124,8 +116,7 @@ module.exports.renderOneReportById = async (req, res) => {
     res.send(foundLog);
   } catch (e) {
     console.log("error");
-    req.flash("error", "Database error");
-    res.redirect("/error");
+    res.send({message: error.message});
   }
 }
 
@@ -133,10 +124,9 @@ module.exports.deleteReportById = async (req, res) => {
   const { id } = req.params;
   try {
     var deleted = await Log.deleteOne({ id: id });
-    req.flash('success', 'report deleted successfully');
     console.log(deleted);
+    res.send(deleted);
   } catch (error) {
-    req.flash('error', 'some error occurred, unable to delete item');
+    res.send({message: error.message});
   }
-  res.redirect('/log/all');
 }

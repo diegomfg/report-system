@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const passportLocalMongoose = require("passport-local-mongoose");
 const timeStamp = require("mongoose-timestamp");
 
 const UserSchema = new mongoose.Schema({
@@ -8,14 +7,15 @@ const UserSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  role: { type: String, default: "junior" },
+  role: { type: String, default: "support" },
   id: mongoose.Schema.Types.ObjectId,
-  password: String,
+  password: {
+    type: String,
+    required: true
+  },
   logEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }]
 });
 
 UserSchema.plugin(timeStamp);
-
-UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);
