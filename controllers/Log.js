@@ -1,49 +1,13 @@
 const Log = require("../models/Log.js");
 const UserController  = require('./User');
-
-module.exports.createNewReport = (newReport) =>{
-  return new Promise((resolve, reject) => {
-    Log.create(newReport, function(error, _newReport) {
-      if (error || !_newReport) {
-        reject(error);
-      } else {
-        resolve(_newReport);
-      }
-    });
-  });
-}
-
-module.exports.findAllReports = ()=>{
-  return new Promise((resolve, reject) => {
-    Log.find({}, (error, allReports) => {
-      if (error || !allReports) {
-        reject(error);
-      } else {
-        resolve(allReports);
-      }
-    });
-  });
-}
-
-module.exports.findById = (id) =>{
-  return new Promise((resolve, reject) => {
-    Log.findById(id, (error, foundReport) => {
-      if (error || !foundReport) {
-        console.log("error in findById promise");
-        reject(error || foundReport);
-      } else {
-        resolve(foundReport);
-      }
-    });
-  });
-}
+const LogUtils = require("../utils/log");
 
 // ControllerActions
 
 module.exports.newReportRoute = async (req, res) => {
   try {
-    var allUsers = await UserController.findAllUsers();
-    res.send({ users: allUsers, currentUser: req.user });
+    // res.send({currentUser: req.user });
+    res.send({message: "New log route"})
   } catch (error) {
     console.log("error: ", error);
     res.send({message: error.message})
@@ -54,42 +18,22 @@ module.exports.createNewReport = async function (req, res) {
 
   try {
 
-    var foundUser = await User.findOne({ _id: req.body.id });
-    console.log(req.body)
-    if (!foundUser) {
+      const { r_title, r_body, r_area } = req.body;
 
-      res.send({message: error.message});
-      console.log(
-          `Either an error or !foundUser:\nError:${error}\nFoundUser:${foundUser}`
-      );
-
-    } else if (foundUser) {
-
-      // create a new log object
-      const { LogTitle, LogBody, LogArea } = req.body;
-
-      var newLog = {
-
-        title: LogTitle,
-
-        body: LogBody,
-
-        author: { id: foundUser._id, username: foundUser.username },
-
-        area: LogArea
-
+      var newReport = {
+        title: r_title,
+        body: r_body,
+        // author goes here. Find the current user and populate him with the new report
+        area: r_area
       };
 
-      var newLog = this.createNewReport(newLog);
-
-      foundUser.logEvents.push(newLog._id);
-
-      foundUser.save();
-
+      var newLog = await LogUtils.createNewReport(newReport);
+      // foundUser.logEvents.push(newLog._id);
+      // foundUser.save();
+      console.log("New report successfully saved")
       res.send(newLog);
 
-    }
-  } catch (error) {
+    } catch (error) {
 
     console.log("Error:", error.message);
 
@@ -100,10 +44,9 @@ module.exports.createNewReport = async function (req, res) {
 
 module.exports.renderAllReports = async (req, res, next) => {
   try {
-    const logs = await this.findAllReports();
+    const logs = await LogUtils.findAllReports();
     res.send({logs: logs });
   } catch (error) {
-    req.flash("error", "Unable to fetch items");
     res.send({message: error.message});
   }
 }
@@ -112,7 +55,7 @@ module.exports.renderOneReportById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const foundLog = await this.findById(id);
+    const foundLog = await LogUtils.findById(id);
     res.send(foundLog);
   } catch (e) {
     console.log("error");
@@ -123,9 +66,10 @@ module.exports.renderOneReportById = async (req, res) => {
 module.exports.deleteReportById = async (req, res) => {
   const { id } = req.params;
   try {
-    var deleted = await Log.deleteOne({ id: id });
-    console.log(deleted);
-    res.send(deleted);
+    // var deleted = await Log.deleteOne({ id: id });
+    // console.log(deleted);
+    // res.send(deleted);
+    res.send(`deleting report with id: ${req.params.id}`)
   } catch (error) {
     res.send({message: error.message});
   }
