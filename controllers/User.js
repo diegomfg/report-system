@@ -1,42 +1,9 @@
 const User = require("../models/User.js");
 const bcrypt = require("bcryptjs");
-
-
-module.exports.createNewUser = (newUser) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.genSalt(10, (err, salt) => { // generating the salt
-      bcrypt.hash(newUser.password, salt, async (error, hash) => {
-        /**
-         * @param hash is the hashed password that is reassigned to the user.
-         */
-        newUser.password = hash;
-        try {
-          const newRegisteredUser = await newUser.save();
-          console.log(newRegisteredUser);
-          /**
-           * @argument returning the succes or error to the user controller
-           */
-          resolve(newRegisteredUser);
-        } catch (error) {
-          reject(error);
-        }
-      });
-    })
-  });
-};
-
-module.exports.findAllUsers = () => {
-  return new Promise((resolve, reject) => {
-    User.find({}, (error, users) => {
-      // if error or users is null
-      if (error || !users) {
-        reject(error);
-      } else {
-        resolve(users);
-      };
-    });
-  });
-};
+const jwt = require('jsonwebtoken');
+const UserUtils = require("../utils/user");
+const authentication = require('../authentication/authenticate');
+const config = require('../config');
 
 module.exports.handleRegister = async (req, res) => {
 
@@ -50,7 +17,7 @@ module.exports.handleRegister = async (req, res) => {
       password: password
     });
 
-    var savedUser = await this.createNewUser(newUser);
+    var savedUser = await UserUtils.createNewUser(newUser);
 
     console.log("User registered succesfully");
     res.send(savedUser);
@@ -63,23 +30,27 @@ module.exports.handleRegister = async (req, res) => {
   }
 }
 
-module.exports.renderAllUsers = async (req, res, next) => {
+module.exports.handleLogin = async (req, res) => {
+  const { username, password } = req.body;
+  console.log(req.body)
   try {
-    const AllUsers = await this.findAllUsers();
-    res.send({ users: AllUsers });
-  } catch (error) {
-    console.log(error);
-    res.send({ message: error.message });
-  }
-}
+    // authenticating user
+    const AuthUser = await authentication.authenticate(username, password);
+    console.log('[auth ok]')
+    // create authorized token
+    console.log('[before token]')
+    const token = jwt.sign(AuthUser.toJSON(), config.SECRET_KEY, { expiresIn: "20m" })
+    console.log("[after token]: " + token);
+    const { iat, exp } = jwt.decode(token);
+    res.send('all good');
 
-module.exports.renderDashboard = async (req, res, next) => {
-  res.send({ currentUser: req.user });
-  next();
+  } catch (error) {
+    console.log("[error UserController]");
+    res.send(error);
+  }
 }
 
 module.exports.handleLogout = function (req, res) {
   // logout
-  res.send("Logged out")
-  res.redirect("/");
+  res.send({ message: "Logged out" })
 }

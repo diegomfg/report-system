@@ -9,6 +9,6 @@ router.get("/", (req, res) => {
 
 
 router.get("/error", (req, res)=>{
-    res.send({path: req.path, currentUser: req.user});
+    res.send({path: req.path});
 });
 module.exports = router;
