@@ -4,15 +4,18 @@ const bcrypt = require("bcryptjs");
 
 module.exports.createNewUser = (newUser) => {
   return new Promise((resolve, reject) => {
-    bcrypt.genSalt(10, (err, salt)=>{ // generating the salt
-      bcrypt.hash(newUser.password, salt, async (error, hash)=>{
-        // assigning the salt to the user
+    bcrypt.genSalt(10, (err, salt) => { // generating the salt
+      bcrypt.hash(newUser.password, salt, async (error, hash) => {
+        /**
+         * @param hash is the hashed password that is reassigned to the user.
+         */
         newUser.password = hash;
         try {
-          // saving the user
           const newRegisteredUser = await newUser.save();
           console.log(newRegisteredUser);
-          // Resolving the user. Basically returning to the controller action
+          /**
+           * @argument returning the succes or error to the user controller
+           */
           resolve(newRegisteredUser);
         } catch (error) {
           reject(error);
@@ -23,10 +26,10 @@ module.exports.createNewUser = (newUser) => {
 };
 
 module.exports.findAllUsers = () => {
-  return new Promise((resolve, reject)=>{
-    User.find({}, (error, users)=>{
+  return new Promise((resolve, reject) => {
+    User.find({}, (error, users) => {
       // if error or users is null
-      if(error || !users){
+      if (error || !users) {
         reject(error);
       } else {
         resolve(users);
@@ -55,7 +58,7 @@ module.exports.handleRegister = async (req, res) => {
   } catch (error) {
     console.log("Error: ", error);
     if (error.name === "UserExistsError") {
-      res.send({message: error.message});
+      res.send({ message: error.message });
     }
   }
 }
@@ -63,10 +66,10 @@ module.exports.handleRegister = async (req, res) => {
 module.exports.renderAllUsers = async (req, res, next) => {
   try {
     const AllUsers = await this.findAllUsers();
-    res.send({users: AllUsers});
+    res.send({ users: AllUsers });
   } catch (error) {
     console.log(error);
-    res.send({message: error.message});
+    res.send({ message: error.message });
   }
 }
 
