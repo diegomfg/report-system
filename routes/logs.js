@@ -1,6 +1,8 @@
 const server = require("express");
-const router = server.Router({ mergeparams: true });
-const ReportController = require("../controllers/Log.js");
+const router = server.Router({
+  mergeparams: true
+});
+const ReportController = require("../controllers/Log.js")
 // var middleware = require("../middleware/validation.js");
 
 router.get("/new", ReportController.newReportRoute);
