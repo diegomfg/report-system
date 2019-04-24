@@ -5,8 +5,6 @@ const router = server.Router({
 const ReportController = require("../controllers/Log.js")
 // var middleware = require("../middleware/validation.js");
 
-router.get("/new", ReportController.newReportRoute);
-
 router.post("/new", ReportController.createNewReport);
 
 router.get("/all", ReportController.renderAllReports);

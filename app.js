@@ -12,6 +12,7 @@ const port = config.PORT || 8080;
 // const cookieParser = require("cookie-parser");
 
 Mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true });
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
@@ -25,7 +26,7 @@ app.use("/user", userRoutes);
 app.listen(config.PORT, process.env.IP, () => {
   console.log(
     `Server is running at port ${port} and connected to database @ ${
-      config.MONGODB_URI
+    config.MONGODB_URI
     }`
   );
 });

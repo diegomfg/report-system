@@ -1,43 +1,30 @@
 const Log = require("../models/Log.js");
-const UserController  = require('./User');
+const UserController = require('./User');
 const LogUtils = require("../utils/log");
 
-// ControllerActions
+module.exports.createNewReport = async (req, res) => {
 
-module.exports.newReportRoute = async (req, res) => {
+  const { title, body, area } = req.body;
+
+  var newReport = {
+    title: title,
+    body: body,
+    // author goes here. Find the current user and populate him with the new report
+    area: area
+  };
+
   try {
-    // res.send({currentUser: req.user });
-    res.send({message: "New log route"})
+
+    var newLog = await LogUtils.createNewReport(newReport);
+    // foundUser.logEvents.push(newLog._id);
+    // foundUser.save();
+    console.log("New report successfully saved")
+    res.sendStatus(200);
+
   } catch (error) {
-    console.log("error: ", error);
-    res.send({message: error.message})
-  }
-}
-
-module.exports.createNewReport = async function (req, res) {
-
-  try {
-
-      const { r_title, r_body, r_area } = req.body;
-
-      var newReport = {
-        title: r_title,
-        body: r_body,
-        // author goes here. Find the current user and populate him with the new report
-        area: r_area
-      };
-
-      var newLog = await LogUtils.createNewReport(newReport);
-      // foundUser.logEvents.push(newLog._id);
-      // foundUser.save();
-      console.log("New report successfully saved")
-      res.send(newLog);
-
-    } catch (error) {
 
     console.log("Error:", error.message);
-
-    res.send({message: error.message});
+    res.send({ error: error.message });
 
   }
 }
@@ -45,9 +32,9 @@ module.exports.createNewReport = async function (req, res) {
 module.exports.renderAllReports = async (req, res, next) => {
   try {
     const logs = await LogUtils.findAllReports();
-    res.send({logs: logs });
+    res.send({ logs: logs });
   } catch (error) {
-    res.send({message: error.message});
+    res.send({ error: error.message });
   }
 }
 
@@ -59,18 +46,16 @@ module.exports.renderOneReportById = async (req, res) => {
     res.send(foundLog);
   } catch (e) {
     console.log("error");
-    res.send({message: error.message});
+    res.send({ error: error.message });
   }
 }
 
 module.exports.deleteReportById = async (req, res) => {
   const { id } = req.params;
   try {
-    // var deleted = await Log.deleteOne({ id: id });
-    // console.log(deleted);
-    // res.send(deleted);
-    res.send(`deleting report with id: ${req.params.id}`)
+    await Log.deleteOne({ id: id });
+    res.sendStatus(200)
   } catch (error) {
-    res.send({message: error.message});
+    res.send({ error: error.message });
   }
 }
