@@ -1,0 +1,28 @@
+.Navbar{
+    height: 3rem;
+    font-size: 1.2rem;
+    position: fixed;
+    width: 100%;
+}
+
+.Navbar ul {
+    list-style:none;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Navbar ul li {
+    margin: .5rem 1rem;
+    outline: none;
+    border-bottom: 1px solid #181178;
+}
+
+.Navbar ul li a, .Navbar ul li a:hover {
+
+    text-decoration: none;
+    cursor: pointer;
+    color: #171717;
+}
+
