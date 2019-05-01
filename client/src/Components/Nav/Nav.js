@@ -1,9 +1,6 @@
 import React from 'react';
-import {Link, Route} from 'react-router-dom';
-import Home from "../Pages/Home";
-import Dashboard from '../Pages/Dashboard';
-import Reports from '../Pages/Reports';
-import Profile from "../Pages/Profile";
+import {Link} from 'react-router-dom';
+
 
 const Nav = (props)=>{
 
@@ -14,11 +11,8 @@ const Nav = (props)=>{
                 <li><Link to="/dashboard">Dashboard</Link></li>
                 <li><Link to="/reports">Reports</Link></li>
                 <li><Link to="/profile">My Profile</Link> </li>
+                <li onClick={props.logout}>{props.isAuth ? "Logout" : "Login"}</li>
             </ul>
-            <Route exact path="/" render={(props)=> <Home {...props} user="Diego"/>}/>
-            <Route path="/dashboard" component={Dashboard}/>
-            <Route path="/reports" component={Reports}/>
-            <Route path="/profile" render={(props)=> <Profile {...props} user={"Diego"}/>}/>
         </nav>
     )
 

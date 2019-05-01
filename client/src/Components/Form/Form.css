@@ -1,0 +1,78 @@
+.Form {
+        
+        flex-basis: 50%;
+        margin: 0rem auto;
+        padding: 0.5rem;
+        text-align: center;
+        /* background-color: aqua; */
+        /* float: left; */
+}
+
+.Form .login {
+    border-bottom: 2px solid blue !important;
+}
+
+.Form .register {
+    border-bottom: 2px solid red !important;
+}
+
+.Form label {
+    font-size: 1.2rem;
+    /* background-color: purple; */
+    font-size: 1.6rem;
+    padding: .5rem;
+    margin-top: 1rem;
+}
+
+.Form input {
+
+    display: block;
+    margin: 1rem auto;
+    width: 13rem;
+    border-radius: 0.3rem;
+    /* background-color: red; */
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    transition: .4s all;
+    border: 1px solid #3a3a3a;
+    outline-color: #ccc;
+    color: #3a3a3a;
+}
+
+.Form input:focus {
+    /* box-shadow: 0px 0px 10px whitesmoke; */
+    outline: 2px solid orangered;
+}
+
+
+
+.Form button {
+    /* font-family: 'Monserrat', sans-serif; */
+    border-radius: 0.3rem;
+    padding: .3rem 1rem;
+    width: auto;
+    background-color: white;
+    outline: none;
+    border: 1px solid gray;
+    font-size: 1.6rem;
+    /* box-shadow: 0rem 0.1rem 0.1rem #171717; */
+    transition: .2s all;
+}
+
+/* .Form button:active{
+    box-shadow: 0rem 0.05rem 0.01rem #171717;
+} */
+
+.Form .Form-title {
+    margin-bottom: 2rem;
+    margin: 0.5rem auto;
+    padding: 1rem;
+    width: fit-content;
+    border-bottom: 1px solid dimgray;
+}
+
+@media (max-width: 930px){
+    .Forms{
+        flex-direction: column;
+    }
+}

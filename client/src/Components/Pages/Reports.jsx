@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
 
 class Reports extends Component {
     state = {  }
     render() { 
         return ( 
-            <Container>
+            // <Container>
+            <div className="content">
                 <h1>Reports page</h1>
-            </Container>
+            </div>
+            // </Container>
          );
     }
 }

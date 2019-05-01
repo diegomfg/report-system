@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './Components/Nav/Nav.css';
+import './Components/Form/Form.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

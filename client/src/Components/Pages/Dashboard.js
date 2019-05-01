@@ -1,12 +1,13 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 
 const Dashboard = (props)=>{
 
     return (
-        <Container>
+        // <Container>
+        <div className="content">
             <h1>Dashboard</h1>
-        </Container>
+        </div>
+        // </Container>
     )
 
 }
