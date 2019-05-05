@@ -4,6 +4,8 @@ const LogUtils = require("../utils/log");
 
 module.exports.createNewReport = async (req, res) => {
 
+  console.log(req.body);
+
   const { title, body, area } = req.body;
 
   var newReport = {

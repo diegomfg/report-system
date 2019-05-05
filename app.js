@@ -16,9 +16,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
-// for when i found a better name for non-admin users
-// updateUsers();
-
 app.use("/", indexRoutes);
 app.use("/log", reportRoutes);
 app.use("/user", userRoutes);

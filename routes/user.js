@@ -14,7 +14,10 @@ router.post("/login", UserController.handleLogin);
 // handleLogout
 router.get("/logout", UserController.handleLogout);
 
-// get user - For Dev
-router.get('/:username', UserController.getUser);
+// get user - For development purposes
+router.get('/profile/:username', UserController.getUser);
+
+// get all users. For development purposes
+router.get('/all', UserController.getAllUsers);
 
 module.exports = router;

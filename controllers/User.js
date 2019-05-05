@@ -80,3 +80,14 @@ module.exports.getUser = async function (req, res) {
     res.send(error);
   }
 }
+
+module.exports.getAllUsers = async function (req, res) {
+
+  try {
+    let AllUsers = await User.find({});
+    res.send({ users: AllUsers })
+  } catch (error) {
+    res.send({ error: error })
+  }
+
+}

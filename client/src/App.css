@@ -1,25 +1,23 @@
-
-
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .App {
   text-align: center;
   font-size: 62.5%;
   /* font-family: 'Playfair Display', serif; */
-
 }
 
-.Main{
+.Main {
   /* background-color: salmon; */
   /* position: absolute; */
 }
 
-.Main > div{
+.Main > div {
   padding-top: 3rem;
   width: 85%;
   max-width: 100%;
@@ -36,7 +34,7 @@ body {
   /* clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); */
 }
 
-.home-text{
+.home-text {
   display: block;
   color: #3a3a3a;
   text-align: center;
@@ -54,4 +52,8 @@ body {
 
 .Forms > form:first-child {
   border-right: 1px solid black;
+}
+
+.not-authorized-alert {
+  display: none;
 }
