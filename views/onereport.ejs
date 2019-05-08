@@ -1,0 +1,13 @@
+<% include partials/header.ejs %>
+<h1>One Report</h1>
+
+<% if(report) { %>
+
+<h1><%= report.title %></h1>
+
+<% } else { %>
+
+<h1>Nothing to render</h1>
+
+<% } %>
+<% include partials/footer.ejs %>

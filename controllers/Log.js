@@ -2,9 +2,17 @@ const Log = require("../models/Log.js");
 const UserController = require('./User');
 const LogUtils = require("../utils/log");
 
+/**
+ * @author Diego A. Matheus
+ * @description MVC Routes
+ */
+
 module.exports.createNewReport = async (req, res) => {
 
-  console.log(req.body);
+  /**
+   * @description This should be {title, body, area, author} 
+   * @description Where "author" is the current user stored in the session in the Main.jsx component
+   */
 
   const { title, body, area } = req.body;
 
@@ -21,7 +29,7 @@ module.exports.createNewReport = async (req, res) => {
     // foundUser.logEvents.push(newLog._id);
     // foundUser.save();
     console.log("New report successfully saved")
-    res.sendStatus(200);
+    res.redirect('/user/reports');
 
   } catch (error) {
 
@@ -34,9 +42,9 @@ module.exports.createNewReport = async (req, res) => {
 module.exports.renderAllReports = async (req, res, next) => {
   try {
     const logs = await LogUtils.findAllReports();
-    res.send({ logs: logs });
+    res.render("reports", { reports: logs, title: "Reports" })
   } catch (error) {
-    res.send({ error: error.message });
+    res.redirect("/", { error: "Server error" });
   }
 }
 
@@ -44,8 +52,8 @@ module.exports.renderOneReportById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const foundLog = await LogUtils.findById(id);
-    res.send(foundLog);
+    const foundReport = await LogUtils.findById(id);
+    res.render("onereport", { report: foundReport, title: "Rendering one report by id" });
   } catch (e) {
     console.log("error");
     res.send({ error: error.message });
@@ -56,8 +64,74 @@ module.exports.deleteReportById = async (req, res) => {
   const { id } = req.params;
   try {
     await Log.deleteOne({ id: id });
-    res.sendStatus(200)
+    res.redirect("/reports");
   } catch (error) {
-    res.send({ error: error.message });
+    res.redirect("/");
   }
 }
+
+// module.exports.createNewReportApi = async (req, res) => {
+
+//   console.log(req.body);
+
+//   /**
+//    * @description This should be {title, body, area, author} 
+//    * @description Where "author" is the current user stored in the session in the Main.jsx component
+//    */
+
+//   const { title, body, area } = req.body;
+
+//   var newReport = {
+//     title: title,
+//     body: body,
+//     // author goes here. Find the current user and populate him with the new report
+//     area: area
+//   };
+
+//   try {
+
+//     var newLog = await LogUtils.createNewReport(newReport);
+//     // foundUser.logEvents.push(newLog._id);
+//     // foundUser.save();
+//     console.log("New report successfully saved")
+//     res.sendStatus(200);
+
+//   } catch (error) {
+
+//     console.log("Error:", error.message);
+//     res.send({ error: error.message });
+
+//   }
+// }
+
+// module.exports.renderAllReportsApi = async (req, res, next) => {
+//   try {
+//     const logs = await LogUtils.findAllReports();
+//     res.send({ logs: logs });
+//   } catch (error) {
+//     res.send({ error: error.message });
+//   }
+// }
+
+// module.exports.renderOneReportByIdApi = async (req, res) => {
+//   const { id } = req.params;
+
+//   try {
+//     const foundLog = await LogUtils.findById(id);
+//     res.send(foundLog);
+//   } catch (e) {
+//     console.log("error");
+//     res.send({ error: error.message });
+//   }
+// }
+
+// module.exports.deleteReportByIdApi = async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     await Log.deleteOne({ id: id });
+//     res.sendStatus(200)
+//   } catch (error) {
+//     res.send({ error: error.message });
+//   }
+// }
+
