@@ -11,8 +11,7 @@ const UserSchema = new mongoose.Schema({
   role: { type: String, default: "support" },
   id: mongoose.Schema.Types.ObjectId,
   password: {
-    type: String,
-    required: true
+    type: String
   },
   logEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }]
 });

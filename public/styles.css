@@ -58,93 +58,48 @@ body {
   display: none;
 }
 
-
-
-
 .Form {
-  flex-basis: 50%;
-  margin: 0rem auto;
-  padding: 0.5rem;
-  text-align: center;
-  /* background-color: aqua; */
-  /* float: left; */
+  width: 30rem;
+  margin: 3rem auto;
 }
 
-.Form .login {
-  border-bottom: 2px solid blue !important;
-}
-
-.Form .register {
-  border-bottom: 2px solid red !important;
-}
-
-.Form label {
-  font-size: 1.2rem;
-  /* background-color: purple; */
-  font-size: 1.6rem;
-  padding: 0.5rem;
-  margin-top: 1rem;
-}
-
-.Form input {
-  display: block;
-  margin: 1rem auto;
-  width: 13rem;
-  border-radius: 0.3rem;
-  /* background-color: red; */
-  padding: 0.5rem;
-  font-size: 1.4rem;
-  transition: 0.4s all;
-  border: 1px solid #3a3a3a;
-  outline-color: #ccc;
-  color: #3a3a3a;
-}
-
-.Form select {
-  display: block;
-  margin: 1rem auto;
-  padding: 0.5rem 1rem;
-}
-
-.Form input:focus {
-  /* box-shadow: 0px 0px 10px whitesmoke; */
-  outline: 2px solid orangered;
-}
-
-.Form button {
-  /* font-family: 'Monserrat', sans-serif; */
-  border-radius: 0.3rem;
-  padding: 0.3rem 1rem;
-  width: auto;
-  background-color: white;
-  outline: none;
-  border: 1px solid gray;
-  font-size: 1.6rem;
-  /* box-shadow: 0rem 0.1rem 0.1rem #171717; */
-  transition: 0.2s all;
-}
-
-/* .Form button:active{
-    box-shadow: 0rem 0.05rem 0.01rem #171717;
-} */
-
-.Form .Form-title {
-  margin-bottom: 2rem;
-  margin: 0.5rem auto;
+.Landing{
+  background-color: #ddd;
+  height: 40rem;
+  margin: 0;
   padding: 1rem;
-  width: fit-content;
-  border-bottom: 1px solid dimgray;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  background-image: linear-gradient(to right bottom, #7ed56f, #04792b);
+  position: relative;
+
 }
 
-@media (max-width: 930px) {
-  .Forms {
-    flex-direction: column;
-  }
-  .Forms > form:first-child {
-    
-    border-right: 0;
-    margin-bottom: 2rem;
-    
-    border-bottom: 1px solid black;
-  }
+.Index_main{
+  position: absolute;
+  width: fit-content;
+  height: 10rem;
+  padding: 1.2rem;
+ text-align: center;
+  display: block;
+  left: 50%;
+  right: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0 auto;
+}
+
+.Index_features{
+  height: 40vh;
+}
+
+.main-container {
+  margin: 2rem auto;
+  /* background-color: aquamarine; */
+}
+
+.card-body {
+  background-color: red;
+  margin-bottom: 1.5rem;
 }

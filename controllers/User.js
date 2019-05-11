@@ -8,9 +8,7 @@ const authentication = require('../authentication/authenticate');
 const config = require('../config');
 
 
-module.exports.handleRegister = async (req, res) => {
-
-  console.log("new entry")
+module.exports.handleRegister = (req, res) => {
 
   const {
     username,
@@ -20,33 +18,35 @@ module.exports.handleRegister = async (req, res) => {
 
   let newUser = {
     username: username,
-    password: password,
     option: option
   }
 
-  User.register(newUser, password, function (err, _user) {
-
-    if (err) {
-
-      res.redirect("/", { success: false })
-
-    } else {
-
-      passport.authenticate("local")(req, res, function () {
-        console.log("User logged in: " + req.user.username)
-        res.redirect("/user/authenticated")
-
-      });
+  User.register(newUser, password).then(user => {
+    passport.authenticate("local")(req, res, function () {
+      res.redirect("/user/dashboard")
     }
-  });
+    )
+  }).catch((error) => {
+    console.log(`Error trying to register user. Error: ${error.message}`);
+    res.redirect("/");
+  })
+
 }
 
-module.exports.handleLogout = function (req, res) {
+module.exports.handleLogout = (req, res) => {
   req.logout();
-  res.redirect("/")
+  res.redirect("/");
 }
 
-module.exports.getUser = async function (req, res) {
+module.exports.userProfile = async (req, res) => {
+
+  console.log(res.locals)
+  res.render("profile", { title: "Profile" })
+
+}
+
+// look for user, with AJAX - Does NOT render view
+module.exports.getUser = async (req, res) => {
   try {
     console.log(req.params);
     const user = await User.findOne({
@@ -58,7 +58,8 @@ module.exports.getUser = async function (req, res) {
   }
 }
 
-module.exports.getAllUsers = async function (req, res) {
+// look for all users in database, with Ajax - Does NOT render view
+module.exports.getAllUsers = async (req, res) => {
 
   try {
     let AllUsers = await User.find({});
@@ -168,5 +169,3 @@ module.exports.getAllUsers = async function (req, res) {
 //   } catch (error) {
 //     res.send({ error: error })
 //   }
-
-// }

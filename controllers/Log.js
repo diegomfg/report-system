@@ -1,4 +1,5 @@
 const Log = require("../models/Log.js");
+const User = require('../models/User');
 const UserController = require('./User');
 const LogUtils = require("../utils/log");
 
@@ -26,8 +27,10 @@ module.exports.createNewReport = async (req, res) => {
   try {
 
     var newLog = await LogUtils.createNewReport(newReport);
-    // foundUser.logEvents.push(newLog._id);
-    // foundUser.save();
+    const foundUser = await User.find({ username: req.user.username });
+    foundUser.logEvents.push(newLog._id);
+    foundUser.save();
+    
     console.log("New report successfully saved")
     res.redirect('/user/reports');
 

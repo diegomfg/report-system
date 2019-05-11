@@ -1,3 +1,8 @@
 <% include partials/header.ejs %>
 <h1>Title</h1>
+<% if (!currentUser) { %>
+<h2>No one here</h2>
+<% } else { %>
+<h2><%= currentUser.username%></h2>
+<% } %>
 <% include partials/footer.ejs %>

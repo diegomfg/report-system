@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <% include partials/includes.ejs %>
+  <title>Login</title>
+</head>
+
+<body>
+  <div class="jumbotron">
+    <form class="Form" method="POST" action="/user/login">
+      <h3 class="Form-title">Login</h3>
+      <div class="form-group">
+        <label for="login_username">Username</label>
+        <input type="text" name="username" id="login_username" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="login_password">Password</label>
+        <input type="password" name="password" id="login_password" required="" class="form-control">
+      </div>
+
+      <button class="btn btn-md btn-warning" type="submit">Login</button>
+    </form>
+  </div>
+</body>
+
+</html>

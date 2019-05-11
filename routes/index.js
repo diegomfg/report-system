@@ -4,7 +4,7 @@ const router = server.Router({ mergeparams: true });
 
 router.get("/", (req, res) => {
 
-  res.render("home", { title: "Home" });
+  res.render("index", { title: "Welcome" });
 
 });
 
@@ -12,6 +12,19 @@ router.get("/error", (req, res) => {
   res.send({ path: req.path });
 });
 
+router.get('/home', (req, res) => {
+  res.render('home', { title: "Home" })
+})
+
+// renders the view for the login page
+router.get('/login', (req, res) => {
+  res.render("login");
+})
+
+// renders the view for the signup page
+router.get('/register', (req, res) => {
+  res.render('register');
+})
 
 
 /**

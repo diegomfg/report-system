@@ -4,6 +4,11 @@
     <li><a href="/user/dashboard">Dashboard</a></li>
     <li><a href="/log/all-reports">Reports</a></li>
     <li><a href="/user/profile">My Profile</a> </li>
-    <li id="logout-btn">Logout</li>
+    <% if (!currentUser) { %>
+    <li><a href="/login">Login</a></li>
+    <% } else { %>
+    <!-- <li><a href="/user/profile/<%=currentUser._id%>"> <%=currentUser.username%> </a></li> -->
+    <li><a href="/user/logout">Logout</a></li>
+    <% } %>
   </ul>
 </nav>
