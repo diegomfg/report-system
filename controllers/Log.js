@@ -20,22 +20,19 @@ module.exports.createNewReport = async (req, res) => {
   var newReport = {
     title: title,
     body: body,
-    // author goes here. Find the current user and populate him with the new report
+    author: req.user,
     area: area
   };
 
   try {
 
     var newLog = await LogUtils.createNewReport(newReport);
-    const foundUser = await User.find({ username: req.user.username });
-    foundUser.logEvents.push(newLog._id);
-    foundUser.save();
     
     console.log("New report successfully saved")
-    res.redirect('/user/reports');
+    res.redirect('/log/all-reports');
 
   } catch (error) {
-
+    console.log(error);
     console.log("Error:", error.message);
     res.send({ error: error.message });
 

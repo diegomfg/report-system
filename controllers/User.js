@@ -63,7 +63,7 @@ module.exports.getAllUsers = async (req, res) => {
 
   try {
     let AllUsers = await User.find({});
-    res.send({ users: AllUsers })
+    res.json({users: AllUsers});
   } catch (error) {
     res.send({ error: error })
   }

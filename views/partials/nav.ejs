@@ -1,14 +1,21 @@
-<nav class="Navbar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/user/dashboard">Dashboard</a></li>
-    <li><a href="/log/all-reports">Reports</a></li>
-    <li><a href="/user/profile">My Profile</a> </li>
-    <% if (!currentUser) { %>
-    <li><a href="/login">Login</a></li>
-    <% } else { %>
-    <!-- <li><a href="/user/profile/<%=currentUser._id%>"> <%=currentUser.username%> </a></li> -->
-    <li><a href="/user/logout">Logout</a></li>
-    <% } %>
-  </ul>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav mr-auto">
+      <a class="nav-item nav-link" href="/user/dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a>
+      <a class="nav-item nav-link" href="/log/all-reports"><i class="fas fa-chart-bar"></i> Reports</a>
+      <a class="nav-item nav-link" href="/user/profile"> <i class="fas fa-address-card"></i> Profile</a>
+      <% if (typeof currentUser !== undefined) { %>
+      <a class="nav-item nav-link" href="/user/logout"><i class="fas fa-door-open"></i> Logout</a>
+      <% } %>
+    </div>
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+  </div>
 </nav>

@@ -3,15 +3,14 @@ const passport = require('passport');
 const router = server.Router({
   mergeparams: true
 });
+const authentication = require('../authentication/authenticate');
 const UserController = require("../controllers/User.js");
-// var middleware = require("../authentication/authenticate.js");
 
-router.get("/dashboard", (req, res) => {
-  console.log(res.locals)
+router.get("/dashboard", authentication.isLoggedIn,(req, res) => {
   res.render("dashboard", { title: "Dashboard" })
 })
 
-router.get("/profile", UserController.userProfile);
+router.get("/profile", authentication.isLoggedIn,UserController.userProfile);
 
 // handleRegister
 router.post("/register", UserController.handleRegister);
@@ -31,19 +30,10 @@ router.post('/login',
 router.get("/logout", UserController.handleLogout);
 
 
-
-
-
-
-
-
-
-
-
 // get user - For development purposes
-router.get('/profile/:username', UserController.getUser);
+router.get('/profile/:username', authentication.isLoggedIn,UserController.getUser);
 
 // get all users. For development purposes
-router.get('/all', UserController.getAllUsers);
+router.get('/all', authentication.isLoggedIn,UserController.getAllUsers);
 
 module.exports = router;

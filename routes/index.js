@@ -12,9 +12,6 @@ router.get("/error", (req, res) => {
   res.send({ path: req.path });
 });
 
-router.get('/home', (req, res) => {
-  res.render('home', { title: "Home" })
-})
 
 // renders the view for the login page
 router.get('/login', (req, res) => {
@@ -24,7 +21,7 @@ router.get('/login', (req, res) => {
 // renders the view for the signup page
 router.get('/register', (req, res) => {
   res.render('register');
-})
+});
 
 
 /**
