@@ -8,12 +8,12 @@ const ReportController = require("../controllers/Log.js")
 
 
 
-router.post("/new", authentication.isLoggedIn,ReportController.createNewReport);
+router.post("/new", authentication.isLoggedIn, ReportController.createNewReport);
 
-router.get("/all-reports", authentication.isLoggedIn ,ReportController.renderAllReports);
+router.get("/all", authentication.isLoggedIn, ReportController.renderAllReports);
 
-router.get("/:id", authentication.isLoggedIn ,ReportController.renderOneReportById);
+router.get("/:id", authentication.isLoggedIn, ReportController.renderOneReportById);
 
-router.delete("/delete/:id", authentication.isLoggedIn ,ReportController.deleteReportById);
+router.get("/delete/:id", authentication.isLoggedIn, ReportController.deleteReportById);
 
 module.exports = router;

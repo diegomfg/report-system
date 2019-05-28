@@ -1,3 +1,4 @@
+const MongoObjectId = require('mongodb').ObjectID;
 const Log = require("../models/Log.js");
 const User = require('../models/User');
 const UserController = require('./User');
@@ -27,9 +28,9 @@ module.exports.createNewReport = async (req, res) => {
   try {
 
     var newLog = await LogUtils.createNewReport(newReport);
-    
+
     console.log("New report successfully saved")
-    res.redirect('/log/all-reports');
+    res.redirect('/log/all');
 
   } catch (error) {
     console.log(error);
@@ -55,17 +56,18 @@ module.exports.renderOneReportById = async (req, res) => {
     const foundReport = await LogUtils.findById(id);
     res.render("onereport", { report: foundReport, title: "Rendering one report by id" });
   } catch (e) {
-    console.log("error");
-    res.send({ error: error.message });
+    console.log(e.message);
+    res.send({ error: e.message });
   }
 }
 
 module.exports.deleteReportById = async (req, res) => {
   const { id } = req.params;
   try {
-    await Log.deleteOne({ id: id });
-    res.redirect("/reports");
+    await Log.deleteOne({ _id: MongoObjectId(id) });
+    res.redirect("/log/all");
   } catch (error) {
+    console.log(error);
     res.redirect("/");
   }
 }

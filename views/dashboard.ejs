@@ -1,7 +1,8 @@
 <% include partials/header.ejs %>
-<h1>Title</h1>
+<h1>Dashboard</h1>
+
 <% if (!currentUser) { %>
-<h2>No one here</h2>
+<p>No one's here and you should absolutely not be here</p>
 <% } else { %>
 <h2><code><%= currentUser.username%></code></h2>
 <div class="container-fluid">
