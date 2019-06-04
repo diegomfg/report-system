@@ -1,9 +1,14 @@
 <% include partials/header.ejs %>
-<h1>One Report</h1>
+
 
 <% if(report) { %>
 
-<h1><%= report.title %></h1>
+<article>
+  <h1><%-report.title%></h1>
+  <h3>By: <%-report.author.username%></h3>
+  <h3>Area:<%-report.area%></h3>
+
+</article>
 
 <% } else { %>
 

@@ -34,7 +34,6 @@ module.exports.createNewReport = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    console.log("Error:", error.message);
     res.send({ error: error.message });
 
   }

@@ -1,10 +1,9 @@
 <% include partials/header.ejs %>
-<h1>Dashboard</h1>
 
 <% if (!currentUser) { %>
 <p>No one's here and you should absolutely not be here</p>
 <% } else { %>
-<h2><code><%= currentUser.username%></code></h2>
+<h2>Hello, <code><%= currentUser.username%></code></h2>
 <div class="container-fluid">
     <div class="row">
         <div class="jumbotron col-md-6">

@@ -4,16 +4,16 @@
 <div class="row">
     <% reports.forEach((report)=>{ %>
     <div class="card col-md-6">
-        <article class="card-body">
+        <article class="card-body report">
             <h5 class="card-title"><%-report.title%></h5>
             <h6 class="card-subtitle mb-2 text-muted">Author: <%-report.author.username%></h6>
             <h6 class="card-subtitle mb-2 text-muted">Area: <%-report.area%></h6>
             <p class="card-text"><%-report.body%></p>
             <a class="btn btn-md btn-warning" href="/log/<%-report.id%>">More</a>
 
-            <!-- <% if(currentUser.username == report.author.username) { %> -->
+            <% if(currentUser.username == report.author.username) {%>
             <a class="btn btn-md btn-danger" href="/log/delete/<%-report.id%>">Delete</a>
-            <!-- <% } %> -->
+            <% } %>
         </article>
     </div>
     <% })%>

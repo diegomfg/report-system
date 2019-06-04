@@ -1,9 +1,10 @@
 <% include partials/header.ejs %>
-<h1>Profile</h1>
+
 <% if (!currentUser) { %>
 <h1>No one logged in, you should not be here</h1>
 <% } else { %>
-<h3><code><%- currentUser.username %></code></h3>
+<h1><code><%- currentUser.username %></code>'s profile</h1>
 <p>I swear i will add new stuff in the future</p>
+<p>Maybe some analytics dashboard</p>
 <% } %>
 <% include partials/footer.ejs %>

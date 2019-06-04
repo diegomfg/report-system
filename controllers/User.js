@@ -27,7 +27,7 @@ module.exports.handleRegister = (req, res) => {
     }
     )
   }).catch((error) => {
-    console.log(`Error trying to register user. Error: ${error.message}`);
+    console.log(error);
     res.redirect("/");
   })
 
@@ -40,7 +40,6 @@ module.exports.handleLogout = (req, res) => {
 
 module.exports.userProfile = async (req, res) => {
 
-  console.log(res.locals)
   res.render("profile", { title: "Profile" })
 
 }
@@ -48,7 +47,7 @@ module.exports.userProfile = async (req, res) => {
 // look for user, with AJAX - Does NOT render view
 module.exports.getUser = async (req, res) => {
   try {
-    console.log(req.params);
+
     const user = await User.findOne({
       'username': req.params.username
     });
@@ -63,7 +62,7 @@ module.exports.getAllUsers = async (req, res) => {
 
   try {
     let AllUsers = await User.find({});
-    res.json({users: AllUsers});
+    res.json({ users: AllUsers });
   } catch (error) {
     res.send({ error: error })
   }

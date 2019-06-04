@@ -13,6 +13,10 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String
   },
+  reports: {
+    type: Number,
+    default: 0
+  },
   logEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Log" }]
 });
 
