@@ -13,13 +13,15 @@ module.exports.handleRegister = (req, res) => {
   const {
     username,
     password,
-    option
+    role
   } = req.body;
 
   let newUser = {
     username: username,
-    option: option
+    role: role
   }
+
+  console.log("About to register new user: ", newUser)
 
   User.register(newUser, password).then(user => {
     passport.authenticate("local")(req, res, function () {

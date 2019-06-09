@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  role: { type: String, default: "support" },
+  role: { type: String, required: true, default: "support" },
   id: mongoose.Schema.Types.ObjectId,
   password: {
     type: String

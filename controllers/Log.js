@@ -9,7 +9,7 @@ const LogUtils = require("../utils/log");
  * @description MVC Routes
  */
 
-module.exports.createNewReport = async (req, res) => {
+module.exports.create = async (req, res) => {
 
   /**
    * @description This should be {title, body, area, author} 
@@ -18,7 +18,7 @@ module.exports.createNewReport = async (req, res) => {
 
   const { title, body, area } = req.body;
 
-  var newReport = {
+  const newReport = {
     title: title,
     body: body,
     author: req.user,
@@ -27,28 +27,29 @@ module.exports.createNewReport = async (req, res) => {
 
   try {
 
-    var newLog = await LogUtils.createNewReport(newReport);
-
+    const newLog = await LogUtils.createNewReport(newReport);
+    LogUtils.updateUserAnalytics(newLog, req.user);
     console.log("New report successfully saved")
     res.redirect('/log/all');
 
   } catch (error) {
+
     console.log(error);
     res.send({ error: error.message });
 
   }
 }
 
-module.exports.renderAllReports = async (req, res, next) => {
+module.exports.all = async (req, res, next) => {
   try {
-    const logs = await LogUtils.findAllReports();
-    res.render("reports", { reports: logs, title: "Reports" })
+    const reports = await LogUtils.findAllReports();
+    res.render("reports", { reports: reports, title: "Reports" })
   } catch (error) {
     res.redirect("/", { error: "Server error" });
   }
 }
 
-module.exports.renderOneReportById = async (req, res) => {
+module.exports.get = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -60,7 +61,7 @@ module.exports.renderOneReportById = async (req, res) => {
   }
 }
 
-module.exports.deleteReportById = async (req, res) => {
+module.exports.delete = async (req, res) => {
   const { id } = req.params;
   try {
     await Log.deleteOne({ _id: MongoObjectId(id) });
@@ -71,6 +72,45 @@ module.exports.deleteReportById = async (req, res) => {
   }
 }
 
+module.exports.edit = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+
+    const report = await LogUtils.findById(id);
+    console.log("Found this: ", report)
+    res.render("edit", { title: "Edit Report", report: report });
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.redirect('/log/all');
+
+  }
+
+}
+
+
+module.exports.editReport = async (req, res) => {
+  const { id } = req.params;
+
+  const { title, body, area } = req.body;
+
+  const reportToUpdate = {
+    title: title,
+    body: body,
+    area: area
+  };
+
+  try {
+    const updated = LogUtils.updateReport(reportToUpdate);
+    res.redirect('/log/all');
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+}
 // module.exports.createNewReportApi = async (req, res) => {
 
 //   console.log(req.body);

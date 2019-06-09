@@ -1,13 +1,23 @@
 <% include partials/header.ejs %>
 
-
 <% if(report) { %>
 
-<article>
+<article class="single-report">
   <h1><%-report.title%></h1>
-  <h3>By: <%-report.author.username%></h3>
+  <h3 class="single-report-author">By: <%-report.author.username%></h3>
   <h3>Area:<%-report.area%></h3>
+  <p><%-report.body%></p>
+  <% if(currentUser.username === report.author.username){ %>
 
+  <a href="/log/edit/<%=report.id%>" class="btn btn-md btn-warning">Edit</a>
+  <a href="/log/delete/<%=report.id%>" class="btn btn-md btn-danger">Delete</a>
+
+  <% } else {}%>
+
+  <% if (currentUser.role === "admin"){ %>
+  <a href="/log/approve/<%=report._id%>" class="btn btn-md btn-primary">Approve</a>
+  <a href="/log/deny/<%=report._id%>" class="btn btn-md btn-secondary">Deny</a>
+  <% } %>
 </article>
 
 <% } else { %>
@@ -15,4 +25,5 @@
 <h1>Nothing to render</h1>
 
 <% } %>
+
 <% include partials/footer.ejs %>

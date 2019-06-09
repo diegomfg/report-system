@@ -13,10 +13,15 @@ body {
   /* font-family: 'Playfair Display', serif; */
 }
 
-/* .Main {
-  /* background-color: salmon; */
-  /* position: absolute; */
-/* }  */
+.Main {
+  background: linear-gradient(to bottom right, rgb(213, 107, 255), #edfcae);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left:0;
+  top:0;
+  overflow: scroll;
+} 
 
 .Main > div {
   padding-top: 3rem;
@@ -28,12 +33,12 @@ body {
 .Main .content {
   padding-top: 2rem;
   /* background-color: darkcyan; */
-  height: 90%;
   z-index: -1000;
   margin: 0 auto;
   padding-bottom: 3rem;
   /* clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); */
 }
+
 
 .home-text {
   display: block;
@@ -112,23 +117,35 @@ body {
 .card{
   border: none;
   padding: 0;
+}
 
+.single-report{
+  width: 70rem;
+  border: 0.1rem solid lavender;
+  border-radius: 0.3rem;
+  box-shadow: 0rem 0rem 0.1rem black;
+  text-align: center;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+}
+
+.single-report-author {
+  display: block;
+  position: relative;
+}
+
+.report, .card {
+  border-radius: 0.7rem;
+}
+
+.feature, .card{
+  margin-bottom: 2rem;
 }
 
 .card-body {
   /* background-color: goldenrod; */
   border: 0.3rem solid;
   text-align: center;
-  
-}
-
-.report {
-  border-radius: 0.7rem;
-}
-
-.Main, .Main{
-  background: linear-gradient(to bottom right, rgb(213, 107, 255), #edfcae);
-  height: 120vh;
 }
 
 .form-wrapper{

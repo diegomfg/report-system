@@ -4,16 +4,17 @@ const router = server.Router({
 });
 const authentication = require('../authentication/authenticate');
 const ReportController = require("../controllers/Log.js")
-// var middleware = require("../middleware/validation.js");
 
+router.post("/new", authentication.isLoggedIn, ReportController.create);
 
+router.get("/all", authentication.isLoggedIn, ReportController.all);
 
-router.post("/new", authentication.isLoggedIn, ReportController.createNewReport);
+router.get("/:id", authentication.isLoggedIn, ReportController.get);
 
-router.get("/all", authentication.isLoggedIn, ReportController.renderAllReports);
+router.get("/delete/:id", authentication.isLoggedIn, ReportController.delete);
 
-router.get("/:id", authentication.isLoggedIn, ReportController.renderOneReportById);
+router.get("/edit/:id", authentication.isLoggedIn, ReportController.edit);
 
-router.get("/delete/:id", authentication.isLoggedIn, ReportController.deleteReportById);
+router.put("/edit/:id", authentication.isLoggedIn, ReportController.editReport);
 
 module.exports = router;

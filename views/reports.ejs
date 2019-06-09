@@ -12,6 +12,7 @@
             <a class="btn btn-md btn-warning" href="/log/<%-report.id%>">More</a>
 
             <% if(currentUser.username == report.author.username) {%>
+
             <a class="btn btn-md btn-danger" href="/log/delete/<%-report.id%>">Delete</a>
             <% } %>
         </article>
