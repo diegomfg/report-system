@@ -15,6 +15,6 @@ router.get("/delete/:id", authentication.isLoggedIn, ReportController.delete);
 
 router.get("/edit/:id", authentication.isLoggedIn, ReportController.edit);
 
-router.put("/edit/:id", authentication.isLoggedIn, ReportController.editReport);
+router.post("/edit/:id", authentication.isLoggedIn, ReportController.editReport);
 
 module.exports = router;

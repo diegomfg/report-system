@@ -1,6 +1,7 @@
 const Log = require("../models/Log.js");
 const User = require("../models/User");
 const UserController = require('../controllers/User');
+const ObjectID = require('mongodb').ObjectID;
 
 module.exports.createNewReport = (newReport) => {
   return new Promise((resolve, reject) => {
@@ -61,8 +62,27 @@ module.exports.findById = (id) => {
   });
 }
 
-// module.exports.updateReport = (report, id)=>{
-//   return new Promise((resolve, reject)=>{
-//     Log.updateOne({_id: id}, {$set: {}})
-//   })
-// }
+module.exports.updateReport = (report, id) => {
+  return new Promise((resolve, reject) => {
+
+    Log.findById(id, (error, _report) => {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        _report.title = report.title;
+        _report.body = report.body;
+        _report.area = report.area;
+        _report.save();
+        resolve(_report);
+      }
+    })
+
+    // } catch (error) {
+    // console.log(error);
+    // reject(error);
+    // });
+
+    // }
+  })
+}

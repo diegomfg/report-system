@@ -22,7 +22,7 @@ module.exports.create = async (req, res) => {
     title: title,
     body: body,
     author: req.user,
-    area: area
+    area: area,
   };
 
   try {
@@ -78,7 +78,6 @@ module.exports.edit = async (req, res) => {
   try {
 
     const report = await LogUtils.findById(id);
-    console.log("Found this: ", report)
     res.render("edit", { title: "Edit Report", report: report });
 
   } catch (error) {
@@ -91,7 +90,6 @@ module.exports.edit = async (req, res) => {
 
 }
 
-
 module.exports.editReport = async (req, res) => {
   const { id } = req.params;
 
@@ -100,14 +98,14 @@ module.exports.editReport = async (req, res) => {
   const reportToUpdate = {
     title: title,
     body: body,
-    area: area
+    area: area,
+    id: MongoObjectId(id)
   };
 
   try {
-    const updated = LogUtils.updateReport(reportToUpdate);
+    const updated = await LogUtils.updateReport(reportToUpdate, id);
     res.redirect('/log/all');
   } catch (error) {
-    console.log(error);
     res.redirect('/');
   }
 }

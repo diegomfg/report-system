@@ -12,11 +12,6 @@
   <a href="/log/edit/<%=report.id%>" class="btn btn-md btn-warning">Edit</a>
   <a href="/log/delete/<%=report.id%>" class="btn btn-md btn-danger">Delete</a>
 
-  <% } else {}%>
-
-  <% if (currentUser.role === "admin"){ %>
-  <a href="/log/approve/<%=report._id%>" class="btn btn-md btn-primary">Approve</a>
-  <a href="/log/deny/<%=report._id%>" class="btn btn-md btn-secondary">Deny</a>
   <% } %>
 </article>
 

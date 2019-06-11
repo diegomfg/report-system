@@ -1,14 +1,15 @@
 <% include partials/header.ejs %>
 <h1>Reports</h1>
-<% if (reports.length !== 0 || !reports) { %>
+<% if (reports.length !== 0 || !reports) {%>
 <div class="row">
-    <% reports.forEach((report)=>{ %>
+    <% reports.slice().reverse().forEach((report)=>{ %>
     <div class="card col-md-6">
         <article class="card-body report">
             <h5 class="card-title"><%-report.title%></h5>
-            <h6 class="card-subtitle mb-2 text-muted">Author: <%-report.author.username%></h6>
+            <h6 class="card-subtitle mb-2 text-muted">Author: <code><%-report.author.username%></code></h6>
             <h6 class="card-subtitle mb-2 text-muted">Area: <%-report.area%></h6>
             <p class="card-text"><%-report.body%></p>
+            <span><%-report.id%></span>
             <a class="btn btn-md btn-warning" href="/log/<%-report.id%>">More</a>
 
             <% if(currentUser.username == report.author.username) {%>
@@ -18,9 +19,8 @@
         </article>
     </div>
     <% })%>
-
 </div>
 <% } else { %>
-<h3>There are: <%- reports.length %> reports</h3>
+<h3>There are no reports to show <code>:(</code></h3>
 <% } %>
 <% include partials/footer.ejs %>

@@ -97,6 +97,19 @@ body {
   margin: 0 auto;
 }
 
+.Index_title{
+  font-weight: 100;
+  font-size: 3rem;
+  margin: 0rem 3rem 3rem 3rem;
+  color: #ddd;
+  font-family: 'Monserat', sans-serif;
+  transition: .5s all;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 0.3rem;
+  background: repeating-linear-gradient(to right, rgba(194, 61, 235, 0.4), rgba(228, 106, 25, 0.4));
+}
+
 .Features {
   background-image: linear-gradient(to left bottom, white, teal);
   height: 80vh;
@@ -120,7 +133,8 @@ body {
 }
 
 .single-report{
-  width: 70rem;
+  width: 70%;
+  min-width: 15rem;
   border: 0.1rem solid lavender;
   border-radius: 0.3rem;
   box-shadow: 0rem 0rem 0.1rem black;
