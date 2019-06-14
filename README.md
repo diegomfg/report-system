@@ -6,3 +6,5 @@
 With this you can register and create reports (logs) to document changes on a project.</p>
 
 <p>This project uses Express as backend server-side framework, MongoDB as database, and MVC as design pattern.</p>
+<p>I might refactor this project later and use the backend as a just-api service, with a React application on the front end.
+That would involve token/cookie authentication on the front end, something that I just don't know how to handle yet.</p>
