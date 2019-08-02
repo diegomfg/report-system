@@ -5,9 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "server": "nodemon app.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \" npm run client\""
+    "server": "nodemon app.js"
   },
   "author": "Diego A. Matheus",
   "license": "ISC",
