@@ -6,10 +6,10 @@ const methodOverride = require("method-override");
 const express_session = require('express-session');
 const passport        = require("passport");
 const LocalStrategy = require("passport-local");
-const indexRoutes = require("./routes/index.js");
-const reportRoutes = require("./routes/logs.js");
-const userRoutes = require("./routes/user.js");
-const User = require('./models/User')
+const indexRoutes = require("./dist/routes/index.js");
+const reportRoutes = require("./dist/routes/logs.js");
+const userRoutes = require("./dist/routes/user.js");
+const User = require('./dist/models/User')
 const dotenv = require('dotenv').config();
 const port = process.env.PORT || 8080;
 
