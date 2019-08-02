@@ -10,6 +10,7 @@ const indexRoutes = require("./routes/index.js");
 const reportRoutes = require("./routes/logs.js");
 const userRoutes = require("./routes/user.js");
 const User = require('./models/User')
+const dotenv = require('dotenv').config();
 const port = process.env.PORT || 8080;
 
 
@@ -64,3 +65,4 @@ app.listen(process.env.PORT, process.env.IP, () => {
     `Server is running at port ${port}`
   );
 });
+
