@@ -13,9 +13,13 @@ const userRoutes = require("./routes/user.js");
 const config = require("./config");
 const User = require('./models/User')
 const port = config.PORT || 8080;
-// const cookieParser = require("cookie-parser");
 
-Mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true });
+
+Mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true }, (error, db)=>{
+    if(error){
+      console.log("ERROR: ", error);
+    }
+  });
 
 
 app.use(bodyParser.json());
