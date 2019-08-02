@@ -5,7 +5,7 @@ const Mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const express_session = require('express-session');
-const passport = require("passport");
+const passport        = require("passport");
 const LocalStrategy = require("passport-local");
 const indexRoutes = require("./routes/index.js");
 const reportRoutes = require("./routes/logs.js");
@@ -59,8 +59,6 @@ app.use("/user", userRoutes);
 
 app.listen(config.PORT, process.env.IP, () => {
   console.log(
-    `Server is running at port ${port} and connected to database @ ${
-    config.MONGODB_URI
-    }`
+    `Server is running at port ${port}`
   );
 });
