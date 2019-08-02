@@ -5,7 +5,6 @@ const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const UserUtils = require("../utils/user");
 const authentication = require('../authentication/authenticate');
-const config = require('../config');
 
 
 module.exports.handleRegister = (req, res) => {

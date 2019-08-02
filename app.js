@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const dotenv = require('dotenv').config();
 const Mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
@@ -10,12 +9,11 @@ const LocalStrategy = require("passport-local");
 const indexRoutes = require("./routes/index.js");
 const reportRoutes = require("./routes/logs.js");
 const userRoutes = require("./routes/user.js");
-const config = require("./config");
 const User = require('./models/User')
-const port = config.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 
-Mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true }, (error, db)=>{
+Mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (error, db)=>{
     if(error){
       console.log("ERROR: ", error);
     }
@@ -61,7 +59,7 @@ app.use("/", indexRoutes);
 app.use("/log", reportRoutes);
 app.use("/user", userRoutes);
 
-app.listen(config.PORT, process.env.IP, () => {
+app.listen(process.env.PORT, process.env.IP, () => {
   console.log(
     `Server is running at port ${port}`
   );
