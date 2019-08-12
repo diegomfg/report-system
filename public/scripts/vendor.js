@@ -1,3 +1,3 @@
-$(document).ready(()=>{
-    alert("done");
-})
+// $(document).ready(()=>{
+//     alert("done");
+// })
