@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const passportLocalMongoose = require('passport-local-mongoose')
+const passportLocalMongoose = require("passport-local-mongoose");
 const timeStamp = require("mongoose-timestamp");
 
 const UserSchema = new mongoose.Schema({
@@ -11,7 +11,8 @@ const UserSchema = new mongoose.Schema({
   role: { type: String, required: true, default: "support" },
   id: mongoose.Schema.Types.ObjectId,
   password: {
-    type: String
+    type: String,
+    minlength: 4
   },
   reports: {
     type: Number,
