@@ -31,12 +31,17 @@ module.exports.userProfile = (req, res) => {
   res.render("profile", { title: "Profile" });
 };
 
-// look for user, with AJAX - Does NOT render view
+/**
+ * @abstract
+ * 
+ * Returns a user after querying in database. API specific only.
+ */
 module.exports.getUser = async (req, res) => {
   try {
     const user = await User.findOne({
       username: req.params.username
-    });
+    }).populate("logEvents").exec();
+    console.log(user);
     res.send(user);
   } catch (error) {
     res.send(error);
@@ -46,7 +51,7 @@ module.exports.getUser = async (req, res) => {
 // look for all users in database, with Ajax - Does NOT render view
 module.exports.getAllUsers = async (req, res) => {
   try {
-    let AllUsers = await User.find({});
+    let AllUsers = await User.find();
     res.json({ users: AllUsers });
   } catch (error) {
     res.send({ error: error });

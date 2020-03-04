@@ -9,25 +9,25 @@ const LogUtils = require("../utils/log");
  * @description MVC Routes
  */
 
-module.exports.create = async (req, res) => {
+ /**
+  * @abstract Handles the report creation.
+  */
 
-  /**
-   * @description This should be {title, body, area, author} 
-   * @description Where "author" is the current user stored in the session in the Main.jsx component
-   */
+module.exports.create = async (req, res) => {
 
   const { title, body, area } = req.body;
 
   const newReport = {
-    title: title,
-    body: body,
-    author: req.user,
-    area: area,
+    title,
+    body,
+    area,
+    author: req.user
   };
 
   try {
 
-    const newLog = await LogUtils.createNewReport(newReport);
+    const newLog = await Log.create(newReport);
+
     LogUtils.updateUserAnalytics(newLog, req.user);
     console.log("New report successfully saved")
     res.redirect('/log/all');
@@ -42,7 +42,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.all = async (req, res, next) => {
   try {
-    const reports = await LogUtils.findAllReports();
+    const reports = await Log.find();
     res.render("reports", { reports: reports, title: "Reports" })
   } catch (error) {
     res.redirect("/", { error: "Server error" });
@@ -53,7 +53,7 @@ module.exports.get = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const foundReport = await LogUtils.findById(id);
+    const foundReport = await Log.findById(id);
     res.render("onereport", { report: foundReport, title: "Rendering one report by id" });
   } catch (e) {
     console.log(e.message);
@@ -77,7 +77,8 @@ module.exports.edit = async (req, res) => {
 
   try {
 
-    const report = await LogUtils.findById(id);
+    const report = await Log.findById(id);
+    
     res.render("edit", { title: "Edit Report", report: report });
 
   } catch (error) {
@@ -96,14 +97,14 @@ module.exports.editReport = async (req, res) => {
   const { title, body, area } = req.body;
 
   const reportToUpdate = {
-    title: title,
-    body: body,
-    area: area,
+    title,
+    body,
+    area,
     id: MongoObjectId(id)
   };
 
   try {
-    const updated = await LogUtils.updateReport(reportToUpdate, id);
+    const updated = await Log.findOneAndUpdate({_id: reportToUpdate.id}, reportToUpdate)
     res.redirect('/log/all');
   } catch (error) {
     res.redirect('/');

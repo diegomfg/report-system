@@ -31,7 +31,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(
   express_session({
-    secret: process.env.E_SECRET || "secretkey",
+    secret: process.env.E_SECRET || "secretkey12312312312312",
     resave: false,
     saveUninitialized: false
   })
@@ -67,6 +67,6 @@ app.use("/", indexRoutes);
 app.use("/log", reportRoutes);
 app.use("/user", userRoutes);
 
-app.listen(process.env.PORT, process.env.IP, () => {
+app.listen(process.env.PORT || 8080, process.env.IP, () => {
   console.log(`Server is running at port ${port}`);
 });

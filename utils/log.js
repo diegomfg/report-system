@@ -77,12 +77,5 @@ module.exports.updateReport = (report, id) => {
         resolve(_report);
       }
     })
-
-    // } catch (error) {
-    // console.log(error);
-    // reject(error);
-    // });
-
-    // }
   })
 }

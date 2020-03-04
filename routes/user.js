@@ -17,7 +17,7 @@ router.post("/register", UserController.handleRegister);
 
 //login route
 router.post("/login", passport.authenticate("local"), function(req, res) {
-  console.log(`ROUTES - USER.JS - JUST LOGGED IN: ${req.user.username}`);
+  // console.log(`ROUTES - USER.JS - JUST LOGGED IN: ${req.user.username}`);
   res.locals.currentUser = req.user;
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user.

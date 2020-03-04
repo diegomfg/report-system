@@ -1,6 +1,4 @@
-
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
 
 module.exports.isLoggedIn = function (req, res, next) {
     if (req.isAuthenticated()) {
